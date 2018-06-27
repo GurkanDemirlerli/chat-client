@@ -1,0 +1,237 @@
+<!-- <div class="container chatBox">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-8">
+    <div class="row" *ngFor="let message of messages">
+      <p>
+        {{message?.message}}  {{message?.from}}
+      </p>
+    </div>
+    <div class="row" style="padding:2%;position:absolute;bottom:0;width:100%;">
+      <input type="text" [(ngModel)]="input" style="display:inline-block;width:89%">
+      <button class="btn btn-primary" (click)="sendMessage()" style="display:inline-block;width:10%">Send</button>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="toolbar">
+    <div class="header-title">
+      Chat-App
+    </div>
+    <div class="ara">
+      <input class="form-control mr-sm-2 search-friends" type="search" placeholder="Arkadaşlarını Bul" aria-label="Search">
+    </div>
+    <div class="icon">
+      <i class="fa fa-search" style="color:white; float:right; font-size:35px; margin-top:8px;"></i>
+    </div>
+  </div>
+  <div class=" panel-box ">
+
+    <div class="row ">
+      <div class="col-md-4 ">
+        <div class="friends-box ">
+          <div class="friends-box--header ">
+            <div class="my-picture ">
+            </div>
+            <div class="my-info">
+              <div class="my-username ">
+                Ronaldo
+              </div>
+              <div class="my-about">
+                ac consectetur. caecat
+              </div>
+            </div>
+          </div>
+          <div class="options">
+            <div class="options--friends active">
+              Friends
+            </div>
+            <div class="options--requests">
+              Requests
+            </div>
+          </div>
+          <div class="friends-box--content ">
+
+            <div class="user-card ">
+              <div class="user-card--picture " [style.background-image]="'url(' + messiPicture + ')'">
+                <span class="badge badge-success">1</span>
+              </div>
+              <div class="user-card--info ">
+                <div class="user-card--info--name ">
+                  Messi
+                </div>
+                <div class="user-card--info--status online ">
+                  Online
+                </div>
+                <div class="user-card--info--about ">
+                  cupidatat non In ac consectetur. caecat
+                </div>
+              </div>
+            </div>
+
+            <div class="user-card ">
+              <div class="user-card--picture ">
+
+              </div>
+              <div class="user-card--info ">
+                <div class="user-card--info--name ">
+                  Neymar
+                </div>
+                <div class="user-card--info--status online ">
+                  Online
+                </div>
+                <div class="user-card--info--about ">
+                  minim veniam, quis nostrud
+                </div>
+              </div>
+            </div>
+
+            <div class="user-card ">
+              <div class="user-card--picture " [style.background-image]="'url(' + drogbaPicture + ')'">
+
+              </div>
+              <div class="user-card--info ">
+                <div class="user-card--info--name ">
+                  Drogba
+                </div>
+                <div class="user-card--info--status offline ">
+                  Offline
+                </div>
+                <div class="user-card--info--about ">
+                  Excepteur sint occaecat cupidatat non
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 ">
+        <div class="chat-box ">
+          <div class="friend-details ">
+            <div class="friend-details--picture ">
+            </div>
+            <div class="friend-details--info ">
+
+              <div class="friend-details--info--username ">
+                Messi
+              </div>
+              <div class="friend-details--info--status online ">
+                Online
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="messages ">
+
+            <div class="message message-sent ">
+              <div class="username ">
+                <div class="name ">Ronaldo</div>
+                <div class="date "> 27 Haziran 16:00</div>
+              </div>
+              <br>
+              <div class="content "> eprehenderit in voluptate velit esse . Mauris </div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-received ">
+              <div class="username ">
+                <div class="name ">Messi</div>
+                <div class="date "> 27 Haziran 16:01</div>
+              </div>
+              <br>
+              <div class="content "> In ac consectetur. Incondimentum </div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-received ">
+              <div class="username ">
+                <div class="name ">Ronaldo</div>
+                <div class="date "> 27 Haziran 16:14</div>
+              </div>
+              <br>
+              <div class="content "> sint occaecat cupidatat </div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-received ">
+              <div class="username ">
+                <div class="name ">Messi</div>
+                <div class="date "> 27 Haziran 16:17</div>
+              </div>
+              <br>
+              <div class="content "> iusmod tempor incididunt ut labore et d</div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-sent ">
+              <div class="username ">
+                <div class="name ">Messi</div>
+                <div class="date "> 27 Haziran 16:19</div>
+              </div>
+              <br>
+              <div class="content ">quis nostrud exercitation ullamco consectetur </div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-received ">
+              <div class="username ">
+                <div class="name ">Messi</div>
+                <div class="date "> 27 Haziran 16:21</div>
+              </div>
+              <br>
+              <div class="content "> Duis aute irure int occaecat cupidatat non </div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-sent ">
+              <div class="username ">
+                <div class="name ">Ronaldo</div>
+                <div class="date "> 27 Haziran 16:23</div>
+              </div>
+              <br>
+              <div class="content "> Lorem ipsum dolor Duis aute irure </div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-sent ">
+              <div class="username ">
+                <div class="name ">Messi</div>
+                <div class="date "> 27 Haziran 16:40</div>
+              </div>
+              <br>
+              <div class="content "> mollit anim id est laborum. </div>
+            </div>
+            <div class="clearfix "></div>
+
+            <div class="message message-received ">
+              <div class="username ">
+                <div class="name ">Ronaldo</div>
+                <div class="date "> 27 Haziran 16:42</div>
+              </div>
+              <br>
+              <div class="content "> nisi ut aliquip ex </div>
+            </div>
+            <div class="clearfix "></div>
+
+          </div>
+
+
+          <div class="message-sender ">
+
+            <div class="form-group ">
+              <input style=" width:84%; display:inline-block; " [(ngModel)]="input " type="text " class="form-control" placeholder="Enter a Message Here... ">
+              <button style="width:14%; display:inline-block; " class="btn btn-info " (click)="sendMessage() ">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
