@@ -1,0 +1,26 @@
+<div class="friends-box ">
+  <div class="friends-box--header ">
+    <div class="my-picture ">
+    </div>
+    <div class="my-info">
+      <div class="my-username ">
+        Ronaldo
+      </div>
+      <div class="my-about">
+        ac consectetur. caecat
+      </div>
+    </div>
+  </div>
+  <div class="options">
+    <div class="option options--friends" [class.activated]="activeTab === 'friends-tab'" (click)="changeTab('friends-tab')">
+      Friends
+    </div>
+    <div class="option options--requests" [class.activated]="activeTab === 'requests-tab'" (click)="changeTab('requests-tab')">
+      Requests
+    </div>
+  </div>
+  <div class="friends-box--content ">
+    <app-friends-tab *ngIf="activeTab === 'friends-tab'"></app-friends-tab>
+    <app-requests-tab *ngIf="activeTab === 'requests-tab'"></app-requests-tab>
+  </div>
+</div>

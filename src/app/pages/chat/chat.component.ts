@@ -1,6 +1,6 @@
+import { AuthService } from './../../providers';
 import { Socket } from 'ng-socket-io';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

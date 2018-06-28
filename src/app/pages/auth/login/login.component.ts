@@ -1,7 +1,7 @@
 import { Socket } from 'ng-socket-io';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../providers';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   email = "";
   password = "";
-  
+
   constructor(
     private authService: AuthService,
     private router: Router,
