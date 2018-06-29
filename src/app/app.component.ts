@@ -1,5 +1,5 @@
+import { SocketService } from './providers';
 import { Component } from '@angular/core';
-import { Socket } from 'ng-socket-io';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +8,11 @@ import { Socket } from 'ng-socket-io';
 })
 export class AppComponent {
   constructor(
-    private socket: Socket
+    public socketService: SocketService
   ) {
-    this.connect();
+    this.socketService.connect();
   }
   title = 'app';
 
-  connect(){
-    if (localStorage.getItem("email")){
-      this.socket.connect();
-      this.socket.emit('storeClientInfo', localStorage.getItem("email"));
-    }
-  }
+
 }

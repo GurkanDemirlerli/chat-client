@@ -41,7 +41,7 @@ export class ChatComponent implements OnInit {
 
   test() {
     let observable = new Observable(observer => {
-      this.socket.on('hi', data => {
+      this.socket.on('onlineFriends', data => {
         observer.next(data);
       });
     });

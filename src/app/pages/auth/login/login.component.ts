@@ -1,7 +1,7 @@
 import { Socket } from 'ng-socket-io';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../providers';
+import { AuthService, SocketService } from '../../../providers';
 
 @Component({
   selector: 'app-login',
@@ -15,20 +15,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private socket: Socket
+    private socketService: SocketService
   ) { }
 
   connect() {
-    this.socket.connect();
-    console.log(this.email);
     const user = {
       email: this.email,
       password: this.password
     };
-    this.authService.login(user).subscribe((resp) => {
-      this.authService.storeUserData(resp.data.email, resp.data.id, resp.data.token);
-      this.socket.connect();
-      this.socket.emit('storeClientInfo', this.email);
+    this.authService.login(user).subscribe(async (resp) => {
+      await this.authService.storeUserData(resp.data.email, resp.data.id, resp.data.token);
+      await this.socketService.connect();
       this.router.navigate(['/chat']);
     });
 

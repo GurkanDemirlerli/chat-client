@@ -1,52 +1,68 @@
+<div class="user-card " *ngFor="let friend of friends">
+  <div class="user-card--picture " [style.background-image]="'url(' + messiPicture + ')'">
 
-  <div class="user-card activated">
-    <div class="user-card--picture " [style.background-image]="'url(' + messiPicture + ')'">
-      <span class="badge badge-success">1</span>
+  </div>
+  <div class="user-card--info ">
+    <div class="user-card--info--name ">
+      {{friend.name}}
     </div>
-    <div class="user-card--info ">
-      <div class="user-card--info--name ">
-        Messi
-      </div>
-      <div class="user-card--info--status online ">
-        Online
-      </div>
-      <div class="user-card--info--about ">
-        cupidatat non In ac consectetur. caecat
-      </div>
+    <div class="user-card--info--status online ">
+      {{friend.status}}
+    </div>
+    <div class="user-card--info--about ">
+      {{friend.about}}
     </div>
   </div>
+</div>
 
-  <div class="user-card ">
-    <div class="user-card--picture ">
 
+<div class="user-card activated">
+  <div class="user-card--picture " [style.background-image]="'url(' + messiPicture + ')'">
+    <span class="badge badge-success">1</span>
+  </div>
+  <div class="user-card--info ">
+    <div class="user-card--info--name ">
+      Messi
     </div>
-    <div class="user-card--info ">
-      <div class="user-card--info--name ">
-        Neymar
-      </div>
-      <div class="user-card--info--status online ">
-        Online
-      </div>
-      <div class="user-card--info--about ">
-        minim veniam, quis nostrud
-      </div>
+    <div class="user-card--info--status online ">
+      Online
+    </div>
+    <div class="user-card--info--about ">
+      cupidatat non In ac consectetur. caecat
     </div>
   </div>
+</div>
 
-  <div class="user-card ">
-    <div class="user-card--picture " [style.background-image]="'url(' + drogbaPicture + ')'">
+<div class="user-card ">
+  <div class="user-card--picture ">
 
+  </div>
+  <div class="user-card--info ">
+    <div class="user-card--info--name ">
+      Neymar
     </div>
-    <div class="user-card--info ">
-      <div class="user-card--info--name ">
-        Drogba
-      </div>
-      <div class="user-card--info--status offline ">
-        Offline
-      </div>
-      <div class="user-card--info--about ">
-        Excepteur sint occaecat cupidatat non
-      </div>
+    <div class="user-card--info--status online ">
+      Online
+    </div>
+    <div class="user-card--info--about ">
+      minim veniam, quis nostrud
     </div>
   </div>
+</div>
 
+<div class="user-card ">
+  <div class="user-card--picture " [style.background-image]="'url(' + drogbaPicture + ')'">
+
+  </div>
+  <div class="user-card--info ">
+    <div class="user-card--info--name ">
+      Drogba
+    </div>
+    <div class="user-card--info--status offline ">
+      Offline
+    </div>
+    <div class="user-card--info--about ">
+      Excepteur sint occaecat cupidatat non
+    </div>
+  </div>
+</div>

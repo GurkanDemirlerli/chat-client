@@ -13,6 +13,9 @@ import { server } from '../environments/environment';
 import { AuthNotAllowed, AuthRequired } from './guards/auth.guard';
 
 import { AuthService } from './providers';
+import { SocketService } from './providers';
+import { UserService } from './providers/user.service';
+
 
 
 import { NavbarComponent } from './components';
@@ -45,6 +48,8 @@ const config: SocketIoConfig = { url: server.url, options: {} }
     AuthService,
     AuthRequired,
     AuthNotAllowed,
+    SocketService,
+    UserService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
   bootstrap: [AppComponent]
