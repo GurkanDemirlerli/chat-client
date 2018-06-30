@@ -1,6 +1,6 @@
 import { AuthService } from '../../../providers';
 import { Socket } from 'ng-socket-io';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['./friendship-box.component.css']
 })
 export class FriendShipBoxComponent implements OnInit {
+    @Output() activatedFriendOutput = new EventEmitter();
     activeTab = "friends-tab";
 
     drogbaPicture = "http://img2.cdn.turkiyegazetesi.com.tr/images/Resources/2014/5/10/700x155282_drogba_1.jpg";
@@ -22,6 +23,11 @@ export class FriendShipBoxComponent implements OnInit {
         if (this.activeTab !== clickedTab) {
             this.activeTab = clickedTab;
         }
+    }
+
+    changeActivatedFriend(ev) {
+        console.log(ev);
+        this.activatedFriendOutput.emit(ev);
     }
 
 

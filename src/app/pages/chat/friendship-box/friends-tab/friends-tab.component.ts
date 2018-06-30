@@ -1,6 +1,6 @@
 import { AuthService } from '../../../../providers';
 import { Socket } from 'ng-socket-io';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from '../../../../providers';
 
@@ -10,7 +10,9 @@ import { UserService } from '../../../../providers';
     styleUrls: ['./friends-tab.component.css']
 })
 export class FriendsTabComponent implements OnInit {
+    @Output() activatedFriendOutput = new EventEmitter();
     friends = [];
+    activatedFriend = "";
 
     drogbaPicture = "http://img2.cdn.turkiyegazetesi.com.tr/images/Resources/2014/5/10/700x155282_drogba_1.jpg";
     messiPicture = "http://www.kimnereli.net/wp-content/uploads/Messi-310x250.jpg";
@@ -62,6 +64,13 @@ export class FriendsTabComponent implements OnInit {
             });
         });
         return observable;
+    }
+
+    toggleActivatedFriend(friendId) {
+        if (friendId !== this.activatedFriend) {
+            this.activatedFriend = friendId;
+            this.activatedFriendOutput.emit(this.activatedFriend);
+        }
     }
 
     ngOnInit() {

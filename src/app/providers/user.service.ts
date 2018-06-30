@@ -30,9 +30,14 @@ export class UserService {
     loadToken() {
         this.authToken = localStorage.getItem('token');; // Get token and asssign to variable to be used elsewhere
     }
-    
+
     getMyFriends() {
         this.createAuthenticationHeaders(); // Create headers before sending to API
         return this.http.get(this.domain + 'api/users/listMyFriends', this.options).map(res => res.json());
+    }
+
+    findMyFriend(friendId) {
+        this.createAuthenticationHeaders(); // Create headers before sending to API
+        return this.http.get(this.domain + 'api/users/findMyFriend/' + friendId, this.options).map(res => res.json());
     }
 }

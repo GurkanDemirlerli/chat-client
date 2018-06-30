@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="friends-box--content ">
-    <app-friends-tab *ngIf="activeTab === 'friends-tab'"></app-friends-tab>
+    <app-friends-tab (activatedFriendOutput)="changeActivatedFriend($event)" *ngIf="activeTab === 'friends-tab'"></app-friends-tab>
     <app-requests-tab *ngIf="activeTab === 'requests-tab'"></app-requests-tab>
   </div>
 </div>

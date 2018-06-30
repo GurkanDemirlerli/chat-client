@@ -30,10 +30,10 @@
   <div class=" panel-box ">
     <div class="row ">
       <div class="col-md-4 ">
-        <app-friendship-box></app-friendship-box>
+        <app-friendship-box (activatedFriendOutput)="changeActivatedFriend($event)"></app-friendship-box>
       </div>
       <div class="col-md-8 ">
-        <app-message-box></app-message-box>
+        <app-message-box [activatedFriend]="activatedFriend"></app-message-box>
       </div>
     </div>
   </div>

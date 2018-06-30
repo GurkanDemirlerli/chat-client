@@ -1,13 +1,13 @@
-<div class="user-card " *ngFor="let friend of friends">
+<div class="user-card " *ngFor="let friend of friends" (click)="toggleActivatedFriend(friend._id)" [class.activated]="friend._id == activatedFriend">
   <div class="user-card--picture " [style.background-image]="'url(' + messiPicture + ')'">
 
   </div>
   <div class="user-card--info ">
     <div class="user-card--info--name ">
-      {{friend.name}}
+      {{friend.name | titlecase}}
     </div>
-    <div class="user-card--info--status online ">
-      {{friend.status}}
+    <div class="user-card--info--status" [class.online]="friend.status == 'online'" [class.offline]="friend.status == 'offline'">
+      {{friend.status | titlecase}}
     </div>
     <div class="user-card--info--about ">
       {{friend.about}}
@@ -16,7 +16,7 @@
 </div>
 
 
-<div class="user-card activated">
+<div class="user-card">
   <div class="user-card--picture " [style.background-image]="'url(' + messiPicture + ')'">
     <span class="badge badge-success">1</span>
   </div>
