@@ -1,6 +1,8 @@
 <div class="user-card " *ngFor="let friend of friends" (click)="toggleActivatedFriend(friend._id)" [class.activated]="friend._id == activatedFriend">
-  <div class="user-card--picture " [style.background-image]="'url(' + messiPicture + ')'">
-
+  <div class="user-card--picture " [style.background-image]="friend.avatar ? 'url(' + friend.avatar + ')' : inherit">
+  <div class="letter-avatar" *ngIf="!friend.avatar">
+      {{friend.name | titlecase | slice:0:1}}
+  </div> 
   </div>
   <div class="user-card--info ">
     <div class="user-card--info--name ">

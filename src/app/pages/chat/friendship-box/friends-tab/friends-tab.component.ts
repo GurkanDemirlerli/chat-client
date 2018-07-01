@@ -1,4 +1,3 @@
-import { AuthService } from '../../../../providers';
 import { Socket } from 'ng-socket-io';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -19,7 +18,6 @@ export class FriendsTabComponent implements OnInit {
 
     constructor(
         private socket: Socket,
-        private authService: AuthService,
         private userService: UserService
     ) {
         this.userService.getMyFriends().subscribe((friends) => {
@@ -69,7 +67,11 @@ export class FriendsTabComponent implements OnInit {
     toggleActivatedFriend(friendId) {
         if (friendId !== this.activatedFriend) {
             this.activatedFriend = friendId;
-            this.activatedFriendOutput.emit(this.activatedFriend);
+            this.friends.forEach(friend => {
+                if (this.activatedFriend == friend._id) {
+                    this.activatedFriendOutput.emit(friend);
+                }
+            });
         }
     }
 

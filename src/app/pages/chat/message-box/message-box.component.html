@@ -1,15 +1,18 @@
-<div class="chat-box ">
+<div class="chat-box " *ngIf="_activatedFriend">
 
   <div class="friend-details ">
-    <div class="friend-details--picture ">
+    <div class="friend-details--picture" [style.background-image]="_activatedFriend.avatar ? 'url(' + _activatedFriend.avatar + ')' : inherit">
+      <div class="letter-avatar" *ngIf="!_activatedFriend.avatar">
+        {{_activatedFriend.name | titlecase | slice:0:1}}
+      </div>
     </div>
     <div class="friend-details--info ">
 
       <div class="friend-details--info--username ">
-        Messi
+        {{_activatedFriend.name | titlecase}}
       </div>
-      <div class="friend-details--info--status online ">
-        Online
+      <div class="friend-details--info--status" [class.online]="_activatedFriend.status == 'online'" [class.offline]="_activatedFriend.status == 'offline'">
+        {{_activatedFriend.status | titlecase}}
       </div>
     </div>
 
@@ -19,10 +22,10 @@
   <div class="messages ">
 
     <div class="div" *ngFor="let message of messages">
-      <div class="message" [class.message-sent]="_activatedFriend != message.from._id" [class.message-received]="_activatedFriend == message.from._id">
+      <div class="message" [class.message-sent]="_activatedFriend?._id != message.from._id" [class.message-received]="_activatedFriend?._id == message.from._id">
         <div class="username ">
           <div class="name ">{{message.from.name}}</div>
-          <div class="date "> {{message.createdAt  | date:'dd MM yy HH:mm:ss'}}</div>
+          <div class="date "> {{message.createdAt | date:'dd MM yy HH:mm:ss'}}</div>
         </div>
         <br>
         <div class="content "> {{message.content}} </div>
@@ -39,4 +42,10 @@
       <button style="width:14%; display:inline-block; " class="btn btn-info " (click)="sendMessage() ">Send</button>
     </div>
   </div>
+</div>
+
+<div class="chat-box no-chat" *ngIf="!_activatedFriend?._id">
+  <h3>
+    Sohbet Başlatmak İçin Bir Arkadaş Seçin.
+  </h3>
 </div>

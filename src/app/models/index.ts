@@ -1,0 +1,1 @@
+export { ActivatedFriendModel } from './activated-friend.model';

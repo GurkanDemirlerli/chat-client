@@ -65,10 +65,9 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  changeActivatedFriend(ev) {
-    this.activatedFriend = ev;
-    console.log('Dikkat', this.activatedFriend);
-    this.activatedFriendOutput.emit(ev);
+  changeActivatedFriend(friend) {
+    this.activatedFriend = friend;
+    this.activatedFriendOutput.emit(friend);
   }
 
   ngOnInit() {

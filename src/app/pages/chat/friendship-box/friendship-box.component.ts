@@ -25,9 +25,9 @@ export class FriendShipBoxComponent implements OnInit {
         }
     }
 
-    changeActivatedFriend(ev) {
-        console.log(ev);
-        this.activatedFriendOutput.emit(ev);
+    changeActivatedFriend(friend) {
+        console.log(friend);
+        this.activatedFriendOutput.emit(friend);
     }
 
 

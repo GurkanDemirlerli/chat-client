@@ -196,7 +196,8 @@ clearfix::after {
 }
 
 .friend-details--picture {
-  background-image: url('http://www.kimnereli.net/wp-content/uploads/Messi-310x250.jpg');
+  border: 1px solid  #053a4a;
+  background-color: #196278;
   display: inline-block;
   width: 50px;
   height: 50px;
@@ -207,6 +208,8 @@ clearfix::after {
 }
 
 .my-picture {
+  border: 1px solid  #3fa4c2;
+  background-color: #196278;
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNp031J6HgGIgGcHeD5ozeg2Kc2V3bVFbiLCZk2nwFOOzVp-Jk');
   display: inline-block;
   width: 60px;
@@ -215,6 +218,29 @@ clearfix::after {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+}
+
+.letter-avatar {
+  padding-left: 1px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #f8fdff;;
+  font-weight: bolder;
+  padding-top: 3px;
+  margin: 0;
+  text-align: center;
+  font-size: 21px;
+}
+
+.friend-details--picture .letter-avatar {
+  padding-left: 2px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  letter-spacing: 1px;
+  color: #f8fdff;;
+  font-weight: bolder;
+  padding-top: 5px;
+  margin: 0;
+  text-align: center;
+  font-size: 25px;
 }
 
 .my-info {
@@ -274,8 +300,9 @@ clearfix::after {
 }
 
 .user-card--picture {
+  border: 1px solid  #053a4a;
+  background-color: #196278;
   margin-top: 7px;
-  background-image: url('https://ichef.bbci.co.uk/news/660/cpsprodpb/4CDF/production/_97197691_c5b4ee4d-b2f3-48fd-8ab1-6654f769f38a.jpg');
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -426,4 +453,19 @@ clearfix::after {
   color: white;
   font-size: 30px;
   font-weight: bold;
+}
+
+.chat-box.no-chat {
+  background-color: rgb(238, 238, 238);
+  text-align: center;
+  position: relative;
+}
+
+.chat-box.no-chat h3 {
+  color: rgb(189, 189, 189);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
