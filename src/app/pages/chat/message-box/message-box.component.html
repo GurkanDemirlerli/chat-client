@@ -19,7 +19,7 @@
   </div>
 
 
-  <div class="messages ">
+  <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="messages ">
 
     <div class="div" *ngFor="let message of messages">
       <div class="message" [class.message-sent]="_activatedFriend?._id != message.from._id" [class.message-received]="_activatedFriend?._id == message.from._id">

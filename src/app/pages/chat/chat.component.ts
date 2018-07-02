@@ -12,6 +12,7 @@ export class ChatComponent implements OnInit {
   email;
   input = "";
   messages = [];
+  searchInput = "";
 
   @Output() activatedFriendOutput = new EventEmitter();
   activatedFriend = "";

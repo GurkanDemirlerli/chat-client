@@ -96,4 +96,9 @@ export class AuthService {
     return this.http.post(this.domain + 'api/users/deleteNotificationId', { userId: userId }).map(res => res.json());
   }
 
+  getMyProfileCard() {
+    this.createAuthenticationHeaders();
+    return this.http.get(this.domain + 'api/users/getMyProfileCard', this.options).map(res => res.json());
+  }
+
 }

@@ -196,7 +196,7 @@ clearfix::after {
 }
 
 .friend-details--picture {
-  border: 1px solid  #053a4a;
+  border: 1px solid #34849d;
   background-color: #196278;
   display: inline-block;
   width: 50px;
@@ -208,9 +208,9 @@ clearfix::after {
 }
 
 .my-picture {
-  border: 1px solid  #3fa4c2;
-  background-color: #196278;
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNp031J6HgGIgGcHeD5ozeg2Kc2V3bVFbiLCZk2nwFOOzVp-Jk');
+  border: 1px solid #55bcdc;
+  background-color: #56a9c2;
+  /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNp031J6HgGIgGcHeD5ozeg2Kc2V3bVFbiLCZk2nwFOOzVp-Jk'); */
   display: inline-block;
   width: 60px;
   height: 60px;
@@ -220,10 +220,24 @@ clearfix::after {
   background-size: cover;
 }
 
+.my-picture .letter-avatar {
+  padding-left: 2px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  letter-spacing: 1px;
+  color: #f8fdff;
+  ;
+  font-weight: bolder;
+  padding-top: 3px;
+  margin: 0;
+  text-align: center;
+  font-size: 35px;
+}
+
 .letter-avatar {
   padding-left: 1px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: #f8fdff;;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f8fdff;
+  ;
   font-weight: bolder;
   padding-top: 3px;
   margin: 0;
@@ -235,7 +249,8 @@ clearfix::after {
   padding-left: 2px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   letter-spacing: 1px;
-  color: #f8fdff;;
+  color: #f8fdff;
+  ;
   font-weight: bolder;
   padding-top: 5px;
   margin: 0;
@@ -288,7 +303,7 @@ clearfix::after {
 }
 
 .friend-details--info--status.offline {
-  color: rgb(172, 24, 24);
+  color: rgb(0, 0, 0);
 }
 
 .friends-box--content {}
@@ -300,7 +315,6 @@ clearfix::after {
 }
 
 .user-card--picture {
-  border: 1px solid  #053a4a;
   background-color: #196278;
   margin-top: 7px;
   display: inline-block;
@@ -404,14 +418,21 @@ clearfix::after {
 
 .options--friends {
   display: inline-block;
-  width: 48%;
+  width: 32%;
   text-align: center;
   cursor: default;
 }
 
 .options--requests {
   display: inline-block;
-  width: 48%;
+  width: 32%;
+  text-align: center;
+  cursor: default;
+}
+
+.options--search {
+  display: inline-block;
+  width: 32%;
   text-align: center;
   cursor: default;
 }
@@ -469,3 +490,4 @@ clearfix::after {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+

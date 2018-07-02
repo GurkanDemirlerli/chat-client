@@ -1,0 +1,32 @@
+.search-users {
+  border-radius: 100px 100px 100px 100px;
+  -moz-border-radius: 100px 100px 100px 100px;
+  -webkit-border-radius: 100px 100px 100px 100px;
+  width: 85%;
+}
+
+.search-tab {
+  padding-left: 12px;
+}
+
+.icon {
+  color: rgb(117, 191, 223);
+  font-size: 35px;
+  float: left;
+}
+
+.add-user {
+  padding-top: 10px;
+  float: right;
+}
+
+.btn-add {
+  background-color: rgb(117, 191, 223);
+  border: 0;
+  border-radius: 50%;
+}
+
+.btn-add:hover {
+  background-color: rgb(26, 110, 145);
+
+}

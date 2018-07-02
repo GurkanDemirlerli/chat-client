@@ -40,4 +40,9 @@ export class UserService {
         this.createAuthenticationHeaders(); // Create headers before sending to API
         return this.http.get(this.domain + 'api/users/findMyFriend/' + friendId, this.options).map(res => res.json());
     }
+
+    searchUsersByName(name) {
+        this.createAuthenticationHeaders(); // Create headers before sending to API
+        return this.http.get(this.domain + 'api/users/searchUsersByName?name=' + name, this.options).map(res => res.json());
+    }
 }

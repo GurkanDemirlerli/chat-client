@@ -1,13 +1,16 @@
 <div class="friends-box ">
   <div class="friends-box--header ">
-    <div class="my-picture ">
+    <div class="my-picture" [style.background-image]="myProfileCard?.avatar ? 'url(' + myProfileCard?.avatar + ')' : inherit">
+      <div class="letter-avatar" *ngIf="!myProfileCard?.avatar">
+        {{myProfileCard?.name | titlecase | slice:0:1}}
+      </div>
     </div>
     <div class="my-info">
       <div class="my-username ">
-        Ronaldo
+        {{myProfileCard?.name | titlecase}}
       </div>
       <div class="my-about">
-        ac consectetur. caecat
+        {{myProfileCard?.about |titlecase}}
       </div>
     </div>
   </div>
@@ -15,12 +18,17 @@
     <div class="option options--friends" [class.activated]="activeTab === 'friends-tab'" (click)="changeTab('friends-tab')">
       Friends
     </div>
+    <div class="option options--search" [class.activated]="activeTab === 'search-tab'" (click)="changeTab('search-tab')">
+      Search
+    </div>
     <div class="option options--requests" [class.activated]="activeTab === 'requests-tab'" (click)="changeTab('requests-tab')">
       Requests
     </div>
+
   </div>
   <div class="friends-box--content ">
     <app-friends-tab (activatedFriendOutput)="changeActivatedFriend($event)" *ngIf="activeTab === 'friends-tab'"></app-friends-tab>
     <app-requests-tab *ngIf="activeTab === 'requests-tab'"></app-requests-tab>
+    <app-search-tab *ngIf="activeTab === 'search-tab'"></app-search-tab>
   </div>
 </div>

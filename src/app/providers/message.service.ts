@@ -27,12 +27,17 @@ export class MessageService {
         });
     }
 
-    getMessagesBetweenMyFriend(friendId){
+    getMessagesBetweenMyFriend(friendId) {
         this.createAuthenticationHeaders(); // Create headers before sending to API
         return this.http.get(this.domain + 'api/users/getMessagesBetweenMyFriend/' + friendId, this.options).map(res => res.json());
     }
 
     loadToken() {
         this.authToken = localStorage.getItem('token');; // Get token and asssign to variable to be used elsewhere
+    }
+
+    createMessage(message) {
+        this.createAuthenticationHeaders();
+        return this.http.post(this.domain + 'api/messages/add', message, this.options).map(res => res.json());
     }
 }

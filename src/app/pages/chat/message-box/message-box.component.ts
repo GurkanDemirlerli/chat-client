@@ -1,5 +1,5 @@
 import { Socket } from 'ng-socket-io';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MessageService, UserService } from '../../../providers';
 import { ActivatedFriendModel } from '../../../models';
@@ -14,6 +14,7 @@ export class MessageBoxComponent implements OnInit {
     drogbaPicture = "http://img2.cdn.turkiyegazetesi.com.tr/images/Resources/2014/5/10/700x155282_drogba_1.jpg";
     friend;
     messages = [];
+    input = "";
     @Input()
     set activatedFriend(activatedFriend) {
         if (activatedFriend) {
@@ -31,13 +32,37 @@ export class MessageBoxComponent implements OnInit {
         private userService: UserService,
         private messageService: MessageService
     ) {
-        // this.userService.findMyFriend(this.activatedFriend).subscribe((friend) => {
-        //     this.friend = friend;
-        //     console.log(this.friend);
-        // });
+        this.getMessages().subscribe(message => {
+            console.log(message);
+            this.messages.push(message);
+        });
     }
 
+    getMessages() {
+        let observable = new Observable(observer => {
+            this.socket.on('receiveMessage', data => {
+                observer.next(data);
+            });
+        });
+        return observable;
+    }
+
+    sendMessage() {
+        const message = {
+            to: this._activatedFriend._id,
+            content: this.input
+        }
+        this.messageService.createMessage(message).subscribe((res) => {
+            // console.log(res.data);
+            this.messages.push(res.data);
+        });
+        this.input = "";
+    }
+
+
+
     ngOnInit() {
+
     }
 
 }
