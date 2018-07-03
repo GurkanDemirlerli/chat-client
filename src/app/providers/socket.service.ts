@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Socket } from 'ng-socket-io';
+import { server } from '../../environments/environment';
 
 @Injectable()
 export class SocketService {
 
     // domain = ""; // Production
-    domain = "http://localhost:1923/";
+    domain = server.url + "/";
 
     constructor(
         private http: Http,

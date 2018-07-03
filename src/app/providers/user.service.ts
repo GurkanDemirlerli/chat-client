@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Socket } from 'ng-socket-io';
+import { server } from '../../environments/environment';
 
 @Injectable()
 export class UserService {
 
-    domain = "http://localhost:1923/";
+    domain = server.url + "/";
     authToken;
     options;
 

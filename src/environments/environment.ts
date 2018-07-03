@@ -8,5 +8,5 @@ export const environment = {
 };
 
 export const server = {
-  url: "http://192.168.56.1:1923"
+  url: "http://192.168.1.8:1923"
 }

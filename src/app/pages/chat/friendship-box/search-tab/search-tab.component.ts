@@ -1,8 +1,5 @@
-import { UserService } from './../../../../providers';
-import { AuthService } from '../../../../providers';
-import { Socket } from 'ng-socket-io';
+import { FriendShipService, UserService } from './../../../../providers';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-search-tab',
@@ -10,13 +7,12 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['./search-tab.component.css']
 })
 export class SearchTabComponent implements OnInit {
-    searchInput = "ron";
+    searchInput = "ma";
     users;
 
     constructor(
-        private socket: Socket,
-        private authService: AuthService,
-        private userService: UserService
+        private friendshipService: FriendShipService,
+        private userService: UserService,
     ) {
 
     }
@@ -31,6 +27,58 @@ export class SearchTabComponent implements OnInit {
         }
     }
 
+    sendFriendShipRequest(userId) {
+        this.friendshipService.sendFriendShipRequest(userId).subscribe((result) => {
+            console.log(result);
+            if (result.success) {
+                this.users.forEach(user => {
+                    if (user._id == userId) {
+                        user.sendedRequestWaiting = result.data._id;
+                        user.isSendedRequestWaiting = true;
+                    }
+                });
+            }
+        });
+    }
+
+    acceptFriendShipRequest(friendShipRequestId, userId) {
+        this.friendshipService.acceptFriendShipRequest(friendShipRequestId).subscribe((result) => {
+            if (result.success) {
+                this.users.forEach(user => {
+                    if (user._id == userId) {
+                        user.isFriend = true;
+                        user.isReceivedRequestWaiting = false;
+                    }
+                });
+            } else {
+                console.log('HATA');
+            }
+        });
+    }
+
+    rejectFriendShipRequest(friendShipRequestId, userId) {
+        this.friendshipService.rejectFriendShipRequest(friendShipRequestId).subscribe((result) => {
+            if (result.success) {
+                this.users.forEach(user => {
+                    if (user._id == userId) {
+                        user.isReceivedRequestWaiting = false;
+                    }
+                });
+            }
+        });
+    }
+
+    cancelSendedFriendShipRequest(friendShipRequestId, userId) {
+        this.friendshipService.cancelSendedFriendShipRequest(friendShipRequestId).subscribe((result) => {
+            if (result.success) {
+                this.users.forEach(user => {
+                    if (user._id == userId) {
+                        user.isSendedRequestWaiting = false;
+                    }
+                });
+            }
+        });
+    }
 
     ngOnInit() {
     }

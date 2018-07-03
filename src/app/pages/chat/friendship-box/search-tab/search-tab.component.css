@@ -15,9 +15,33 @@
   float: left;
 }
 
-.add-user {
+.user-option {
   padding-top: 10px;
   float: right;
+}
+
+.user-option--icon {
+  height: 30px;
+  font-size: 16px;
+  display: block;
+  float: right;
+  padding-right: 10px;
+}
+
+.user-option--icon i:hover {
+  color: rgb(117, 191, 223);
+}
+
+.user-option--icon i {
+  padding-left: 10px;
+  color: rgb(21, 89, 118);
+}
+
+.user-option--info {
+  display: block;
+  float: right;
+  font-size: 10px;
+  color: rgb(147, 147, 147);
 }
 
 .btn-add {
@@ -28,5 +52,34 @@
 
 .btn-add:hover {
   background-color: rgb(26, 110, 145);
+}
 
+.self {
+  font-size: 12px;
+  color: rgb(147, 147, 147);
+  padding-top: 30px;
+}
+
+.friend {
+  font-size: 12px;
+  color: rgb(147, 147, 147);
+  padding-top: 30px;
+}
+
+.SendedRequestWaiting {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+}
+
+.SendedRequestWaiting i {
+  color: rgb(117, 191, 223);
+}
+
+.ReceivedRequestWaiting {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+}
+
+.ReceivedRequestWaiting i {
+  color: rgb(117, 191, 223);
 }

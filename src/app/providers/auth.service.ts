@@ -3,12 +3,13 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Socket } from 'ng-socket-io';
+import { server } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
 
   // domain = ""; // Production
-  domain = "http://localhost:1923/";
+  domain = server.url + "/";
   authToken;
   user;
   options;
