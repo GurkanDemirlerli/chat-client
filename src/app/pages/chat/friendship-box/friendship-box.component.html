@@ -13,8 +13,15 @@
         {{myProfileCard?.about |titlecase}}
       </div>
     </div>
-    <div class="notifications">
-      <i class="fa fa-globe" [class.activated]="activeTab === 'notifications-tab'" (click)="changeTab('notifications-tab')"></i>
+    <div class="notifications" *ngIf="notificationCount == 0">
+      <i class="fa fa-envelope" [class.activated]="activeTab === 'notifications-tab'" (click)="changeTab('notifications-tab')">
+      </i>
+    </div>
+
+    <div class="notifications" *ngIf="notificationCount > 0">
+      <i class="fa fa-envelope-open" [class.activated]="activeTab === 'notifications-tab'" (click)="changeTab('notifications-tab')">
+      </i>
+      <span>{{notificationCount}}</span>
     </div>
   </div>
   <div class="options">
@@ -23,11 +30,11 @@
       Friends
     </div>
     <div class="option options--search" [class.activated]="activeTab === 'search-tab'" (click)="changeTab('search-tab')">
-        <i class="fa fa-search"></i>
+      <i class="fa fa-search"></i>
       Search
     </div>
     <div class="option options--requests" [class.activated]="activeTab === 'requests-tab'" (click)="changeTab('requests-tab')">
-        <i class="fa fa-user-plus"></i>
+      <i class="fa fa-user-plus"></i>
       Requests
     </div>
 

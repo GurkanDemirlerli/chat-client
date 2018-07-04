@@ -12,7 +12,7 @@ import { LocalNotificationModel } from '../../../../models';
 })
 export class NotificationsTabComponent implements OnInit {
     notifications: LocalNotificationModel[] = [];
-
+    art = 1;
     constructor(
         private socket: Socket,
         private userService: UserService,
@@ -42,6 +42,11 @@ export class NotificationsTabComponent implements OnInit {
                 console.log(this.notifications);
             });
         });
+    }
+
+    arttir() {
+        this.localNotificationService.emitUnReadedNotificationsCount(this.art);
+        this.art++;
     }
 
     ngOnInit() {

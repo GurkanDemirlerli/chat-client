@@ -12,15 +12,31 @@
   color: white;
 }
 
+.notifications span {
+  width: 18px;
+  height: 18px;
+  border-radius: 30%;
+  background-color: rgb(184, 0, 0);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 13px;
+  font-weight: bolder;
+  margin-left: -5px;
+  margin-top: -5px;
+  text-align: center;
+}
+
 .notifications i {
   font-size: 25px;
+  transition: transform 0.2s ease-out;
+  transition: color 0.2s ease-out;
 }
 
 .notifications i:hover {
-  font-size: 35px;
+  transform: scale(1.5);
 }
 
 .notifications i.activated {
-  font-size: 35px;
   color: #104f62;
 }
