@@ -13,20 +13,27 @@
         {{myProfileCard?.about |titlecase}}
       </div>
     </div>
+    <div class="notifications">
+      <i class="fa fa-globe" [class.activated]="activeTab === 'notifications-tab'" (click)="changeTab('notifications-tab')"></i>
+    </div>
   </div>
   <div class="options">
     <div class="option options--friends" [class.activated]="activeTab === 'friends-tab'" (click)="changeTab('friends-tab')">
+      <i class="fa fa-user"></i>
       Friends
     </div>
     <div class="option options--search" [class.activated]="activeTab === 'search-tab'" (click)="changeTab('search-tab')">
+        <i class="fa fa-search"></i>
       Search
     </div>
     <div class="option options--requests" [class.activated]="activeTab === 'requests-tab'" (click)="changeTab('requests-tab')">
+        <i class="fa fa-user-plus"></i>
       Requests
     </div>
 
   </div>
   <div class="friends-box--content ">
+    <app-notifications-tab *ngIf="activeTab === 'notifications-tab'"></app-notifications-tab>
     <app-friends-tab (activatedFriendOutput)="changeActivatedFriend($event)" *ngIf="activeTab === 'friends-tab'"></app-friends-tab>
     <app-requests-tab *ngIf="activeTab === 'requests-tab'"></app-requests-tab>
     <app-search-tab *ngIf="activeTab === 'search-tab'"></app-search-tab>

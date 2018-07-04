@@ -12,7 +12,7 @@ import { server } from '../environments/environment';
 
 import { AuthNotAllowed, AuthRequired } from './guards/auth.guard';
 
-import { SocketService, MessageService, UserService, AuthService, FriendShipService } from './providers';
+import { SocketService, MessageService, UserService, AuthService, FriendShipService, LocalNotificationService } from './providers';
 
 import { NavbarComponent } from './components';
 
@@ -45,6 +45,7 @@ const config: SocketIoConfig = { url: server.url, options: {} }
     AuthRequired,
     AuthNotAllowed,
     FriendShipService,
+    LocalNotificationService,
     MessageService,
     SocketService,
     UserService,

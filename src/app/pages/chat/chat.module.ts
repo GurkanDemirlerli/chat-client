@@ -9,6 +9,7 @@ import { RequestsTabComponent } from './friendship-box/requests-tab/requests-tab
 import { CommonModule } from '@angular/common';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { SearchTabComponent } from './friendship-box/search-tab/search-tab.component';
+import { NotificationsTabComponent } from './friendship-box/notifications-tab/notifications-tab.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { SearchTabComponent } from './friendship-box/search-tab/search-tab.compo
         ChatComponent,
         FriendShipBoxComponent,
         FriendsTabComponent,
+        NotificationsTabComponent,
         RequestsTabComponent,
         SearchTabComponent,
         MessageBoxComponent,

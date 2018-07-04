@@ -18,6 +18,9 @@
   app-navbar {
     display: none;
   }
+  .panel-box {
+    margin-top: 0 !important;
+  }
 }
 
 html {
@@ -408,7 +411,7 @@ clearfix::after {
 }
 
 .options {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .options--friends {

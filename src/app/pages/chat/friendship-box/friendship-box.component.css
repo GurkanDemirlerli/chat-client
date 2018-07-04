@@ -1,0 +1,26 @@
+.notifications {
+  margin: 5px 10px;
+  right: 0;
+  margin-right: 20px;
+  margin-top: 15px;
+  top: 0;
+  position: absolute;
+  border: 0;
+  border-radius: 0;
+  height: 50px;
+  display: inline-block;
+  color: white;
+}
+
+.notifications i {
+  font-size: 25px;
+}
+
+.notifications i:hover {
+  font-size: 35px;
+}
+
+.notifications i.activated {
+  font-size: 35px;
+  color: #104f62;
+}

@@ -1,0 +1,12 @@
+<div class="notifications-tab">
+  <div class="notification-card" *ngFor="let notification of notifications">
+    <div class="notification-card--picture" [style.background-image]="notification.from.avatar ? 'url(' + notification.from.avatar + ')' : inherit">
+      <div class="letter-avatar" *ngIf="!notification.from.avatar">
+        {{notification.from.name | titlecase | slice:0:1}}
+      </div>
+    </div>
+    <div class="notification-content">
+      {{notification.content}}
+    </div>
+  </div>
+</div>
