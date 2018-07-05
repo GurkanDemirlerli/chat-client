@@ -41,6 +41,12 @@ export class NotificationsTabComponent implements OnInit {
                 this.notifications.push(notification);
                 console.log(this.notifications);
             });
+            this.localNotificationService.makeAllNotificationsReaded().subscribe((res) => {
+                if (res.success) {
+                    this.localNotificationService.emitUnReadedNotificationsCount(0);
+                    console.log('Notificationlar okundu olarak isaretlendi.');
+                }
+            });
         });
     }
 

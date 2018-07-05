@@ -1,4 +1,4 @@
-.messages{
+.messages {
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -24,4 +24,12 @@
 
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(231, 231, 231, 0.4);
+}
+
+.status i {
+  float: right;
+}
+
+.status i.readed {
+  color: #0a4051;
 }

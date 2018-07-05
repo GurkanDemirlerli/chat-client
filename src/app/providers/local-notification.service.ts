@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map';
 import { Socket } from 'ng-socket-io';
 import { server } from '../../environments/environment';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class LocalNotificationService {
@@ -11,7 +13,7 @@ export class LocalNotificationService {
     private domain = server.url;
     private authToken;
     private options;
-    public unReadedNotificationsCount = new Subject<number>();
+    unReadedNotificationsCount: BehaviorSubject<number> = new BehaviorSubject(0);
     emitUnReadedNotificationsCount(newValue) {
         this.unReadedNotificationsCount.next(newValue);
     }
@@ -24,6 +26,7 @@ export class LocalNotificationService {
         this.getUnReadedNotificationsCount().subscribe((data) => {
             this.emitUnReadedNotificationsCount(data.data);
         });
+        this.observeLocalNotifications();
     }
 
     private createAuthenticationHeaders() {
@@ -36,7 +39,7 @@ export class LocalNotificationService {
         });
     }
 
-    public getMylocalNotifications() {
+    getMylocalNotifications() {
         this.createAuthenticationHeaders();
         return this.http.get(this.domain + '/api/users/getMyNotifications', this.options).map(res => res.json());
     }
@@ -49,5 +52,19 @@ export class LocalNotificationService {
     private loadToken() {
         this.authToken = localStorage.getItem('token');
     }
+
+    makeAllNotificationsReaded() {
+        this.createAuthenticationHeaders();
+        return this.http.get(this.domain + '/api/users/makeAllNotificationsReaded', this.options).map(res => res.json());
+    }
+
+    observeLocalNotifications() {
+        this.socket.on('receiveLocalNotification', data => {
+            // observer.next(data);
+            this.emitUnReadedNotificationsCount(this.unReadedNotificationsCount.value + 1);
+        });
+    }
+
+
 
 }

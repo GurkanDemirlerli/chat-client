@@ -29,6 +29,10 @@
         </div>
         <br>
         <div class="content "> {{message.content}} </div>
+        <div class="clearfix "></div>
+        <div class="status" *ngIf="_activatedFriend?._id != message.from._id">
+          <i class="fas fa-check readed" ></i>
+        </div>
       </div>
       <div class="clearfix "></div>
     </div>
