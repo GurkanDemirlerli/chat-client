@@ -22,6 +22,9 @@ export class MessageBoxComponent implements OnInit {
             this.messageService.getMessagesBetweenMyFriend(this._activatedFriend._id).subscribe((messages) => {
                 this.messages = messages.data;
             });
+            this.messageService.makeAllReceivedMessagesReadedFromMyFriend(activatedFriend._id).subscribe((res) => {
+
+            });
         }
     }
 
@@ -36,12 +39,41 @@ export class MessageBoxComponent implements OnInit {
             console.log(message);
             this.messages.push(message);
         });
+
+        this.observeIsReaded().subscribe(data => {
+            this.messages.forEach(message => {
+                if (message.isRead == false) {
+                    message.isRead = true;
+                }
+            });
+        });
+    }
+
+    observeIsReaded() {
+        let observable = new Observable(observer => {
+            this.socket.on('messagesReaded', data => {
+                if (this._activatedFriend) {
+                    if (data == this._activatedFriend._id) {
+                        observer.next(data);
+                    }
+                }
+
+            });
+        });
+        return observable;
     }
 
     getMessages() {
         let observable = new Observable(observer => {
             this.socket.on('receiveMessage', data => {
-                observer.next(data);
+                console.log(data);
+                if (this._activatedFriend) {
+                    if (data.from._id == this._activatedFriend._id) {
+                        observer.next(data);
+                        this.messageService.makeAllReceivedMessagesReadedFromMyFriend(this._activatedFriend._id).subscribe((res) => {
+                        });
+                    }
+                }
             });
         });
         return observable;

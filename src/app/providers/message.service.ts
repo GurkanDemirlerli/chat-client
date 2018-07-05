@@ -41,4 +41,9 @@ export class MessageService {
         this.createAuthenticationHeaders();
         return this.http.post(this.domain + 'api/messages/add', message, this.options).map(res => res.json());
     }
+
+    makeAllReceivedMessagesReadedFromMyFriend(friendId) {
+        this.createAuthenticationHeaders(); // Create headers before sending to API
+        return this.http.get(this.domain + 'api/messages/makeAllReceivedMessagesReadedFromMyFriend/' + friendId, this.options).map(res => res.json());
+    }
 }

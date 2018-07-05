@@ -114,7 +114,7 @@ clearfix::after {
 }
 
 .message {
-  min-width: 180px;
+  min-width: 130px;
   font-size: 14px;
   padding: 1% 2%;
   margin: 5px 1%;
@@ -141,7 +141,6 @@ clearfix::after {
 }
 
 .message-sent .username .date {
-  float: left;
   font-weight: lighter;
   font-size: 10px;
 }

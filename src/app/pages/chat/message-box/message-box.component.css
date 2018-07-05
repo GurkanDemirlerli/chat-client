@@ -26,10 +26,43 @@
   background: rgba(231, 231, 231, 0.4);
 }
 
-.status i {
+.date {
+  display: inline-block;
+}
+
+.status {
+  display: inline-block;
+}
+
+.message-sent .date-and-status {
+  float: left;
+}
+
+.message-received .date-and-status {
   float: right;
 }
 
+.name {
+  float: right;
+}
+
+.status i {
+  /* float: left; */
+}
+
 .status i.readed {
+  -webkit-animation: rotation 2s infinite;
+  animation-iteration-count: 1;
   color: #0a4051;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotateY(0deg);
+    color: white;
+  }
+  to {
+    -webkit-transform: rotateY(359deg);
+    color: #18637a;
+  }
 }

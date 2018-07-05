@@ -23,16 +23,23 @@
 
     <div class="div" *ngFor="let message of messages">
       <div class="message" [class.message-sent]="_activatedFriend?._id != message.from._id" [class.message-received]="_activatedFriend?._id == message.from._id">
+
         <div class="username ">
           <div class="name ">{{message.from.name}}</div>
-          <div class="date "> {{message.createdAt | date:'dd MM yy HH:mm:ss'}}</div>
+
+          <div class="date-and-status">
+            <div class="status" *ngIf="_activatedFriend?._id != message.from._id">
+              <i class="fas readed" [class.fa-check]="!message.isRead" [class.fa-check-double]="message.isRead" [class.readed]="message.isRead"></i>
+            </div>
+            <div class="date"> {{message.createdAt | date:'HH:mm'}}</div>
+          </div>
+
+
         </div>
         <br>
         <div class="content "> {{message.content}} </div>
         <div class="clearfix "></div>
-        <div class="status" *ngIf="_activatedFriend?._id != message.from._id">
-          <i class="fas fa-check readed" ></i>
-        </div>
+
       </div>
       <div class="clearfix "></div>
     </div>
