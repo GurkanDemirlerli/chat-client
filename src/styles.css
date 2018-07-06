@@ -415,21 +415,21 @@ clearfix::after {
 
 .options--friends {
   display: inline-block;
-  width: 32%;
+  width: 30%;
   text-align: center;
   cursor: default;
 }
 
 .options--requests {
   display: inline-block;
-  width: 32%;
+  width: 35%;
   text-align: center;
   cursor: default;
 }
 
 .options--search {
   display: inline-block;
-  width: 32%;
+  width: 30%;
   text-align: center;
   cursor: default;
 }

@@ -34,6 +34,7 @@
       Search
     </div>
     <div class="option options--requests" [class.activated]="activeTab === 'requests-tab'" (click)="changeTab('requests-tab')">
+      <span class="badge badge-success">{{receivedFriendRequestsCount}}</span>
       <i class="fa fa-user-plus"></i>
       Requests
     </div>

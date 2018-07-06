@@ -1,5 +1,9 @@
 import { MyProfileCardModel } from './../../../models';
-import { AuthService, LocalNotificationService } from '../../../providers';
+import {
+    AuthService,
+    LocalNotificationService,
+    FriendShipService
+} from '../../../providers';
 import { Socket } from 'ng-socket-io';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -14,11 +18,12 @@ export class FriendShipBoxComponent implements OnInit {
     activeTab = "friends-tab";
     myProfileCard: MyProfileCardModel;
     notificationCount = 0;
-
+    receivedFriendRequestsCount = 0;
     constructor(
         private socket: Socket,
         private authService: AuthService,
-        private localNotificationService: LocalNotificationService
+        private localNotificationService: LocalNotificationService,
+        private friendshipService: FriendShipService
     ) {
         this.authService.getMyProfileCard().subscribe((myProfileCard) => {
             this.myProfileCard = myProfileCard.data;
@@ -26,6 +31,10 @@ export class FriendShipBoxComponent implements OnInit {
         this.localNotificationService.unReadedNotificationsCount.subscribe((value) => {
             console.log(value);
             this.notificationCount = value;
+        });
+
+        this.friendshipService.receivedFriendRequestsCount.subscribe((value) => {
+            this.receivedFriendRequestsCount = value;
         });
     }
 

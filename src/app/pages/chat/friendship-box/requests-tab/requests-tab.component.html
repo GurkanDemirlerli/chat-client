@@ -1,3 +1,79 @@
+<div class="requests-tab">
 
-requests tab working
+  <div class="received-requests">
+    <div *ngFor="let request of requests">
 
+      <div class="user-card" *ngIf="!request.isSelfRequest">
+        <div class="user-card--picture " [style.background-image]="request.sender.avatar ? 'url(' + request.sender.avatar + ')' : inherit">
+          <div class="letter-avatar" *ngIf="!request.sender.avatar">
+            {{request.sender.name | titlecase | slice:0:1}}
+          </div>
+        </div>
+        <div class="user-card--info ">
+          <div class="user-card--info--name ">
+            {{request.sender.name | titlecase}}
+          </div>
+          <div class="user-card--info--about ">
+            {{request.sender.email}}
+          </div>
+        </div>
+
+
+
+        <div class="user-option">
+          <div class="user-option--icon">
+            <i class="fa fa-check" (click)="acceptFriendShipRequest(request._id,request.sender._id)"></i>
+            <i class="fa fa-times" (click)="rejectFriendShipRequest(request._id,request.sender._id)"></i>
+          </div>
+          <div class="clearfix"></div>
+          <div class="user-option--info">
+            Size Arkadaşlık İsteği Yolladı.
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="sended-requests">
+    <div *ngFor="let request of requests">
+
+      <div class="user-card" *ngIf="request.isSelfRequest">
+        <div class="user-card--picture " [style.background-image]="request.receiver.avatar ? 'url(' + request.receiver.avatar + ')' : inherit">
+          <div class="letter-avatar" *ngIf="!request.receiver.avatar">
+            {{request.receiver.name | titlecase | slice:0:1}}
+          </div>
+        </div>
+        <div class="user-card--info ">
+          <div class="user-card--info--name ">
+            {{request.receiver.name | titlecase}}
+          </div>
+          <div class="user-card--info--about ">
+            {{request.receiver.email}}
+          </div>
+        </div>
+
+
+
+        <div class="user-option">
+          <div class="user-option--icon">
+            <i class="fa fa-trash-alt" (click)="cancelSendedFriendShipRequest(request._id,request.receiver._id)"></i>
+          </div>
+          <div class="clearfix"></div>
+          <div class="user-option--info">
+            Arkadaşlık İsteğini İptal Et.
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

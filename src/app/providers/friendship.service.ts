@@ -2,17 +2,30 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { server } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Socket } from 'ng-socket-io';
 
 @Injectable()
 export class FriendShipService {
 
-    domain = server.url + "/";
-    authToken;
-    options;
+    private domain = server.url + "/";
+    private authToken;
+    private options;
+
+    receivedFriendRequestsCount: BehaviorSubject<number> = new BehaviorSubject(0);
+    emitReceivedFriendRequestsCount(newValue) {
+        this.receivedFriendRequestsCount.next(newValue);
+    }
 
     constructor(
         private http: Http,
-    ) { }
+        private socket: Socket
+    ) {
+        this.getReceivedFriendRequestsCount().subscribe((data) => {
+            this.emitReceivedFriendRequestsCount(data.data);
+        });
+        this.observeReceivedFriendRequestsCount();
+    }
 
     // Function to create headers, add token, to be used in HTTP requests
     createAuthenticationHeaders() {
@@ -58,6 +71,23 @@ export class FriendShipService {
         }
         this.createAuthenticationHeaders();
         return this.http.post(this.domain + 'api/friendship/cancelSendedFriendShipRequest', body, this.options).map(res => res.json());
+    }
+
+    getReceivedFriendRequestsCount() {
+        this.createAuthenticationHeaders();
+        return this.http.get(this.domain + 'api/friendship/getReceivedFriendRequestsCount', this.options).map(res => res.json());
+    }
+
+    observeReceivedFriendRequestsCount() {
+        this.socket.on('receiveFriendShipRequest', data => {
+            // observer.next(data);
+            this.emitReceivedFriendRequestsCount(this.receivedFriendRequestsCount.value + data);
+        });
+    }
+
+    getMyAllFriendShipRequests() {
+        this.createAuthenticationHeaders();
+        return this.http.get(this.domain + 'api/friendship/getMyAllFriendShipRequests', this.options).map(res => res.json());
     }
 
 }

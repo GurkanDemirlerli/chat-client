@@ -4,75 +4,75 @@
   </div>
   <input class="form-control mr-sm-2 search-users" [ngModel]="searchInput" (ngModelChange)="searchUsers($event)" type="search"
     placeholder="Arkadaşlarını Bul" aria-label="Search">
-</div>
-<div class="clearfix"></div>
+  <div class="clearfix"></div>
 
-<div class="user-card " *ngFor="let user of users">
-  <div class="user-card--picture " [style.background-image]="user.avatar ? 'url(' + user.avatar + ')' : inherit">
-    <div class="letter-avatar" *ngIf="!user.avatar">
-      {{user.name | titlecase | slice:0:1}}
+  <div class="user-card " *ngFor="let user of users">
+    <div class="user-card--picture " [style.background-image]="user.avatar ? 'url(' + user.avatar + ')' : inherit">
+      <div class="letter-avatar" *ngIf="!user.avatar">
+        {{user.name | titlecase | slice:0:1}}
+      </div>
     </div>
+    <div class="user-card--info ">
+      <div class="user-card--info--name ">
+        {{user.name | titlecase}}
+      </div>
+      <div class="user-card--info--about ">
+        {{user.email}}
+      </div>
+    </div>
+
+    <div class="user-option">
+      <!-- Arkadaş Olmama Durumu -->
+      <div *ngIf="!user.isSelf && !user.isFriend && !user.isSendedRequestWaiting && !user.isReceivedRequestWaiting">
+        <div class="user-option--icon">
+          <i class="fa fa-plus" (click)="sendFriendShipRequest(user._id)"></i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="user-option--info">
+          Arkadaşlık İsteği Gönder
+        </div>
+      </div>
+      <!-- Kendisi Olma Durumu -->
+      <div *ngIf="user.isSelf">
+        <div class="user-option--icon">
+        </div>
+        <div class="clearfix"></div>
+        <div class="user-option--info">
+          Siz
+        </div>
+      </div>
+      <!-- Beklemede Olan Gönderilmiş Arkadaşlık İsteği Olma Durumu -->
+      <div *ngIf="user.isSendedRequestWaiting">
+        <div class="user-option--icon">
+          <i class="fa fa-trash-alt" (click)="cancelSendedFriendShipRequest(user.sendedRequestWaiting,user._id)"></i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="user-option--info">
+          Arkadaşlık İsteği Gönderildi.
+        </div>
+      </div>
+      <!-- Beklemede Olan Alınmış Arkadaşlık İsteği Olma Durumu -->
+      <div *ngIf="user.isReceivedRequestWaiting">
+        <div class="user-option--icon">
+          <i class="fa fa-check" (click)="acceptFriendShipRequest(user.receivedRequestWaiting,user._id)"></i>
+          <i class="fa fa-times" (click)="rejectFriendShipRequest(user.receivedRequestWaiting,user._id)"></i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="user-option--info">
+          Size Arkadaşlık İsteği Yolladı.
+        </div>
+      </div>
+      <!-- Arkadaş Olma Durumu -->
+      <div *ngIf="user.isFriend">
+        <div class="user-option--icon">
+        </div>
+        <div class="clearfix"></div>
+        <div class="user-option--info">
+          Arkadaşsınız.
+        </div>
+      </div>
+    </div>
+
+
   </div>
-  <div class="user-card--info ">
-    <div class="user-card--info--name ">
-      {{user.name | titlecase}}
-    </div>
-    <div class="user-card--info--about ">
-      {{user.email}}
-    </div>
-  </div>
-
-  <div class="user-option">
-    <!-- Arkadaş Olmama Durumu -->
-    <div *ngIf="!user.isSelf && !user.isFriend && !user.isSendedRequestWaiting && !user.isReceivedRequestWaiting">
-      <div class="user-option--icon">
-        <i class="fa fa-plus" (click)="sendFriendShipRequest(user._id)"></i>
-      </div>
-      <div class="clearfix"></div>
-      <div class="user-option--info">
-        Arkadaşlık İsteği Gönder
-      </div>
-    </div>
-    <!-- Kendisi Olma Durumu -->
-    <div *ngIf="user.isSelf">
-      <div class="user-option--icon">
-      </div>
-      <div class="clearfix"></div>
-      <div class="user-option--info">
-        Siz
-      </div>
-    </div>
-    <!-- Beklemede Olan Gönderilmiş Arkadaşlık İsteği Olma Durumu -->
-    <div *ngIf="user.isSendedRequestWaiting">
-      <div class="user-option--icon">
-        <i class="fa fa-trash-alt" (click)="cancelSendedFriendShipRequest(user.sendedRequestWaiting,user._id)"></i>
-      </div>
-      <div class="clearfix"></div>
-      <div class="user-option--info">
-        Arkadaşlık İsteği Gönderildi.
-      </div>
-    </div>
-    <!-- Beklemede Olan Alınmış Arkadaşlık İsteği Olma Durumu -->
-    <div *ngIf="user.isReceivedRequestWaiting">
-      <div class="user-option--icon">
-        <i class="fa fa-check" (click)="acceptFriendShipRequest(user.receivedRequestWaiting,user._id)"></i>
-        <i class="fa fa-times" (click)="rejectFriendShipRequest(user.receivedRequestWaiting,user._id)"></i>
-      </div>
-      <div class="clearfix"></div>
-      <div class="user-option--info">
-        Size Arkadaşlık İsteği Yolladı.
-      </div>
-    </div>
-    <!-- Arkadaş Olma Durumu -->
-    <div *ngIf="user.isFriend">
-      <div class="user-option--icon">
-      </div>
-      <div class="clearfix"></div>
-      <div class="user-option--info">
-        Arkadaşsınız.
-      </div>
-    </div>
-  </div>
-
-
 </div>
