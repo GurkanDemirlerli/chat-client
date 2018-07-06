@@ -44,6 +44,14 @@ export class FriendsTabComponent implements OnInit {
             });
         });
 
+        this.observeUnreadedMessages().subscribe((data: any) => {
+            this.friends.forEach(friend => {
+                if (friend._id == data.from._id && this.activatedFriend != data.from._id) {
+                    friend.unReadedMessagesCount++;
+                }
+            });
+        });
+
     }
 
     observeBeingOnline() {
@@ -64,16 +72,29 @@ export class FriendsTabComponent implements OnInit {
         return observable;
     }
 
+    observeUnreadedMessages() {
+        let observable = new Observable(observer => {
+            this.socket.on('receiveMessage', data => {
+                observer.next(data);
+            });
+        });
+        return observable;
+    }
+
     toggleActivatedFriend(friendId) {
         if (friendId !== this.activatedFriend) {
+
             this.activatedFriend = friendId;
             this.friends.forEach(friend => {
                 if (this.activatedFriend == friend._id) {
+                    friend.unReadedMessagesCount = 0;
                     this.activatedFriendOutput.emit(friend);
                 }
             });
         }
     }
+
+
 
     ngOnInit() {
     }
