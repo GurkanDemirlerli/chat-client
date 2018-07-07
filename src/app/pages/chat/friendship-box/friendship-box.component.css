@@ -1,3 +1,28 @@
+.friends-box {
+  background-color: white;
+  border-radius: 25px 25px 10px 10px;
+  -moz-border-radius: 25px 25px 10px 10px;
+  -webkit-border-radius: 25px 25px 10px 10px;
+  border: 0px solid #000000;
+  overflow: hidden;
+  -webkit-box-shadow: -1px 6px 23px -5px rgba(0, 0, 0, 0.33);
+  -moz-box-shadow: -1px 6px 23px -5px rgba(0, 0, 0, 0.33);
+  box-shadow: -1px 6px 23px -5px rgba(0, 0, 0, 0.33);
+  height: 700px;
+  /* 700 yap */
+}
+
+.friends-box--header {
+  border: 0px solid #000000;
+  background: #5bc0de;
+  position: relative;
+  height: 70px;
+  padding: 1.5%;
+  -webkit-box-shadow: -1px 6px 23px -5px rgba(216, 216, 216, 0.33);
+  -moz-box-shadow: -1px 6px 23px -5px rgba(238, 238, 238, 0.33);
+  box-shadow: -1px 6px 23px -5px rgba(201, 201, 201, 0.33);
+}
+
 .notifications {
   margin: 5px 10px;
   right: 0;
@@ -27,6 +52,17 @@
   text-align: center;
 }
 
+.options {
+  height: 30px;
+}
+
+.friends-box--content {
+  padding-top:10px;
+  height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 .notifications i {
   font-size: 25px;
   transition: transform 0.2s ease-out;
@@ -39,4 +75,27 @@
 
 .notifications i.activated {
   color: #104f62;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(203, 203, 203, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(216, 216, 216, 0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(247, 247, 247, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(231, 231, 231, 0.4);
 }

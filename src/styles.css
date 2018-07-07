@@ -41,29 +41,7 @@ body {
 
 /* Track */
 
-.friends-box {
-  background-color: white;
-  border-radius: 25px 25px 10px 10px;
-  -moz-border-radius: 25px 25px 10px 10px;
-  -webkit-border-radius: 25px 25px 10px 10px;
-  border: 0px solid #000000;
-  overflow: hidden;
-  -webkit-box-shadow: -1px 6px 23px -5px rgba(0, 0, 0, 0.33);
-  -moz-box-shadow: -1px 6px 23px -5px rgba(0, 0, 0, 0.33);
-  box-shadow: -1px 6px 23px -5px rgba(0, 0, 0, 0.33);
-  height: 700px;
-}
 
-.friends-box--header {
-  border: 0px solid #000000;
-  background: #5bc0de;
-  position: relative;
-  height: 70px;
-  padding: 1.5%;
-  -webkit-box-shadow: -1px 6px 23px -5px rgba(216, 216, 216, 0.33);
-  -moz-box-shadow: -1px 6px 23px -5px rgba(238, 238, 238, 0.33);
-  box-shadow: -1px 6px 23px -5px rgba(201, 201, 201, 0.33);
-}
 
 .chat-box {
   background-color: white;
@@ -309,6 +287,7 @@ clearfix::after {
   height: 70px;
   padding: 4px;
   border-bottom: 1px solid rgb(235, 235, 235);
+  position: relative;
 }
 
 .user-card--picture {

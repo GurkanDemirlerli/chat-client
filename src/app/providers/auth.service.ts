@@ -36,6 +36,10 @@ export class AuthService {
     this.authToken = localStorage.getItem('token');; // Get token and asssign to variable to be used elsewhere
   }
 
+  controlUniquenessForEmail(email) {
+    return this.http.get(this.domain + 'api/users/controlUniquenessForEmail/' + email).map(res => res.json());
+  }
+
   // Function to register user accounts
   registerUser(user) {
     return this.http.post(this.domain + 'api/users/signup', user).map(res => res.json());
