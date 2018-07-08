@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../providers';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { SpaceValidators, PasswordValidator, EmailValidators } from '../../../validators';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import {
+  EmailValidators,
+  UsernameValidators,
+  FirstnameValidators,
+  LastnameValidators,
+  PasswordValidators
+} from '../../../validators';
 
 @Component({
   selector: 'app-signup',
@@ -10,67 +16,159 @@ import { SpaceValidators, PasswordValidator, EmailValidators } from '../../../va
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  // email = "";
-  // password = "";
-  // name = "";
   constructor(
     private authService: AuthService,
     private router: Router,
   ) { }
 
   registerForm = new FormGroup({
+    //#region email Control
+    email: new FormControl('',
+      [
+        //#region Sync Validators
+        Validators.required,
+        Validators.maxLength(255),
+        Validators.minLength(5),
+        EmailValidators.isValid,
+        //#endregion
+      ],
+      [
+        //#region Async Validators
+        EmailValidators.shouldBeUnique(this.authService)
+        //#endregion
+      ]
+    ),
+    //#endregion
 
-    email: new FormControl('', [
-      // Validators.compose([
-      Validators.required,
-      // Validators.minLength(10),
-      // Validators.maxLength(30),
-      Validators.email,//degistir
-      // ])
-    ], EmailValidators.shouldBeUnique(this.authService)),
-    name: new FormControl('', [
-      // Validators.compose([
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-      SpaceValidators.cannotContainSpace
-      // ])
-    ]),
+    //#region username Control
+    username: new FormControl('',
+      [
+        //#region Sync Validators
+        Validators.required,
+        Validators.maxLength(15),
+        Validators.minLength(5),
+        UsernameValidators.isValid,
+        UsernameValidators.cannotContainSpace
+        //#endregion
+      ],
+      [
+        //#region Async Validators
+        // UsernameValidators.shouldBeUnique(this.authService)
+        //#endregion
+      ]
+    ),
+    //#endregion
 
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(20),
-      PasswordValidator.areEqual,
-      SpaceValidators.cannotContainSpace
-    ])
+    //#region firstname Control
+    firstname: new FormControl('',
+      [
+        //#region Sync Validators
+        Validators.required,
+        Validators.maxLength(20),
+        Validators.minLength(2),
+        FirstnameValidators.isValid,
+        FirstnameValidators.cannotContainSpace
+        //#endregion
+      ],
+      [
+        //#region Async Validators
+        //#endregion
+      ]
+    ),
+    //#endregion
+
+    //#region lastname Control
+    lastname: new FormControl('',
+      [
+        //#region Sync Validators
+        Validators.required,
+        Validators.maxLength(20),
+        Validators.minLength(2),
+        LastnameValidators.isValid,
+        LastnameValidators.cannotContainSpace
+        //#endregion
+      ],
+      [
+        //#region Async Validators
+        //#endregion
+      ]
+    ),
+    //#endregion
+
+    //#region passwords Group
+    passwords: new FormGroup({
+      //#region password Control
+      password: new FormControl('',
+        [
+          //#region Sync Validators
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(6),
+          PasswordValidators.isValid,
+          LastnameValidators.cannotContainSpace
+          //#endregion
+        ],
+        [
+          //#region Async Validators
+          //#endregion
+        ]
+      ),
+      //#endregion
+
+      //#region confirm_password Control
+      confirm_password: new FormControl('',
+        [
+          //#region Sync Validators
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(6),
+          PasswordValidators.isValid,
+          LastnameValidators.cannotContainSpace
+          //#endregion
+        ],
+        [
+          //#region Async Validators
+          //#endregion
+        ]
+      ),
+      //#endregion
+    }, [
+        PasswordValidators.passwordMatch,
+      ]),
+    //#endregion
   });
 
+
+
+  //#region GETS
   get email() {
     return this.registerForm.get('email');
   }
 
-  get name() {
-    return this.registerForm.get('name');
+  get username() {
+    return this.registerForm.get('username');
   }
 
-  get lastName() {
-    return this.registerForm.get('lastName');
+  get firstname() {
+    return this.registerForm.get('firstname');
+  }
+
+  get lastname() {
+    return this.registerForm.get('lastname');
   }
 
   get password() {
-    return this.registerForm.get('password');
+    return this.registerForm.get('passwords.password');
   }
 
-  get telephone() {
-    return this.registerForm.get('telephone');
+  get confirm_password() {
+    return this.registerForm.get('passwords.confirm_password');
   }
 
-  tete(){
-    console.log(this.registerForm.get('email'));
+  get passwords() {
+    return this.registerForm.get('passwords');
   }
-
-
+  //#endregion
 
   register() {
     console.log(this.registerForm.value);
@@ -92,3 +190,5 @@ export class SignupComponent implements OnInit {
   }
 
 }
+
+  // PasswordValidator.areEqual,

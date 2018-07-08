@@ -1,54 +1,299 @@
-<!-- <div class="container" style="padding-top:5%;">
-  <h3>Sign Up</h3>
-  <br>
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input [(ngModel)]="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input [(ngModel)]="password" type="password" class="form-control" id="password" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input [(ngModel)]="name" type="text" class="form-control" id="name" placeholder="Name">
-  </div>
-  <button type="submit" class="btn btn-primary" (click)="signup()">Submit</button>
-</div> -->
-
 <div class="container" style="padding-top:5%;">
   <h3>Sign Up</h3>
   <form [formGroup]="registerForm" (ngSubmit)="register()">
-    <div *ngIf="registerForm.errors" class="alert alert-danger">
+    <div *ngIf="registerForm.errors" class="invalid-feedback">
       <div>Kayıt Başarısız.</div>
     </div>
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    
+    <!-- EMAIL BASLANGIC -->
     <div class="form-group">
       <label for="email">Email address</label>
-      <input formControlName="email" type="email" class="form-control" name="email" id="email" placeholder="Email">
-      <div *ngIf="email.pending">Checking for uniqueness...</div>      
-      <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-        <div *ngIf="email.errors.required">Email is required.</div>
-        <div *ngIf="email.errors.emailTaken">Email is already taken.</div>
-        <div *ngIf="email.errors.email">Email is not accepted.</div>
+      <input 
+        formControlName="email" 
+        type="email" 
+        class="form-control" 
+        name="email" 
+        id="email" 
+        placeholder="Email"
+        [class.is-valid]="!email.invalid && email.touched" 
+        [class.is-invalid]="email.invalid && email.touched"
+      >
+      <div *ngIf="email.pending">Checking for uniqueness...</div>
+      <!-- INVALID FEEDBACKS START -->
+      <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
+        <div *ngIf="email.errors.required">
+          Email is required.
+        </div>
+        <div *ngIf="email.errors.emailTaken">
+          Email is already taken.
+        </div>
+        <div *ngIf="email.errors.minlength">
+          Email should be minimum {{email.errors.minlength.requiredLength}} characters.
+        </div>
+        <div *ngIf="email.errors.maxlength">
+          Email should be maximm {{email.errors.maxlength.requiredLength}} characters.
+        </div>
+        <div *ngIf="!email.errors.required && email.errors.isValid">
+          Email is not accepted.
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="name">Ad</label>
-      <input formControlName="name" type="text" class="form-control" name="name" id="name" placeholder="Adınız">
-      <div *ngIf="name.pending">Checking for uniqueness...</div>
-      <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
-        <div *ngIf="name.errors.required">Name is required.</div>
-        <div *ngIf="name.errors.cannotContainSpace">Name cannot contain space.</div>
-        <div *ngIf="name.errors.shouldBeUnique">Username is already taken.</div>
-        <div *ngIf="name.errors.minlength">Name should be minimum {{name.errors.minlength.requiredLength}} characters.</div>
+      <!-- INVALID FEEDBACKS END -->
+
+      <!-- VALID FEEDBACKS START -->
+      <div *ngIf="email.touched && !email.invalid" class="valid-feedback">
+        <div>
+          Looks good!.
+        </div>
       </div>
+      <!-- VALID FEEDBACKS END -->
     </div>
+    <!-- EMAIL BITIS -->
+		
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+		
+    <!-- USERNAME BASLANGIC -->
     <div class="form-group">
-      <label for="password">Parola</label>
-      <input formControlName="password" type="password" class="form-control" name="password" id="password" placeholder="Parola">
+      <label for="username">Username</label>
+      <input 
+        formControlName="username" 
+        type="username" 
+        class="form-control" 
+        name="username" 
+        id="username" 
+        placeholder="Username"
+        [class.is-valid]="!username.invalid && username.touched" 
+        [class.is-invalid]="username.invalid && username.touched"
+      >
+      <div *ngIf="username.pending">Checking for uniqueness...</div>
+      <!-- INVALID FEEDBACKS START -->
+      <div *ngIf="username.touched && username.invalid" class="invalid-feedback">
+        <div *ngIf="username.errors.required">
+          Username is required.
+        </div>
+        <div *ngIf="username.errors.usernameTaken">
+          Username is already taken.
+        </div>
+        <div *ngIf="username.errors.cannotContainSpace">
+          Username cannot contain space.
+        </div>
+        <div *ngIf="username.errors.minlength">
+          Username should be minimum {{username.errors.minlength.requiredLength}} characters.
+        </div>
+        <div *ngIf="username.errors.maxlength">
+          Username should be maximm {{username.errors.maxlength.requiredLength}} characters.
+        </div>
+        <div *ngIf="!username.errors.required && username.errors.isValid">
+          Username is not accepted.
+        </div>
+      </div>
+      <!-- INVALID FEEDBACKS END -->
+
+      <!-- VALID FEEDBACKS START -->
+      <div *ngIf="username.touched && !username.invalid" class="valid-feedback">
+        <div>
+          Looks good!.
+        </div>
+      </div>
+      <!-- VALID FEEDBACKS END -->
     </div>
+    <!-- USERNAME BITIS -->
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    
+    <!-- FIRSTNAME BASLANGIC -->
+    <div class="form-group">
+      <label for="firstname">Ad</label>
+      <input 
+        formControlName="firstname" 
+        type="text" 
+        class="form-control" 
+        name="firstname" 
+        id="firstname" 
+        placeholder="Adınız"
+        [class.is-valid]="!firstname.invalid && firstname.touched" 
+        [class.is-invalid]="firstname.invalid && firstname.touched"
+      >
+      <!-- INVALID FEEDBACKS START -->
+      <div *ngIf="firstname.touched && firstname.invalid" class="invalid-feedback">
+        <div *ngIf="firstname.errors.required">
+          First name is required.
+        </div>
+        <div *ngIf="firstname.errors.cannotContainSpace">
+          First name cannot contain space.
+        </div>
+        <div *ngIf="firstname.errors.minlength">
+          First name should be minimum {{firstname.errors.minlength.requiredLength}} characters.
+        </div>
+        <div *ngIf="lastname.errors.maxlength">
+          First name should be maximum {{firstname.errors.maxlength.requiredLength}} characters.
+        </div>
+        <div *ngIf="!firstname.errors.required && firstname.errors.isValid">
+          Lütfen gerçersiz karakterleri kaldırın.
+        </div>
+      </div>
+      <!-- INVALID FEEDBACKS END -->
+
+      <!-- VALID FEEDBACKS START -->
+      <div *ngIf="firstname.touched && !firstname.invalid" class="valid-feedback">
+        <div>
+          Looks good!.
+        </div>
+      </div>
+      <!-- VALID FEEDBACKS END -->
+    </div>
+    <!-- FIRSTNAME BITIS -->
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    
+    <!-- LASTNAME BASLANGIC -->
+    <div class="form-group">
+        <label for="lastname">Soy Ad</label>
+        <input 
+          formControlName="lastname" 
+          type="text" 
+          class="form-control" 
+          name="lastname" 
+          id="lastname" 
+          placeholder="Soy Adınız"
+          [class.is-valid]="!lastname.invalid && lastname.touched" 
+          [class.is-invalid]="lastname.invalid && lastname.touched"
+        >
+        <!-- INVALID FEEDBACKS START -->
+        <div *ngIf="lastname.touched && lastname.invalid" class="invalid-feedback">
+          <div *ngIf="lastname.errors.required">
+            Last name is required.
+          </div>
+          <div *ngIf="lastname.errors.minlength">
+            Last name should be minimum {{lastname.errors.minlength.requiredLength}} characters.
+          </div>
+          <div *ngIf="lastname.errors.maxlength">
+            Last name should be maximum {{lastname.errors.maxlength.requiredLength}} characters.
+          </div>
+          <div *ngIf="lastname.errors.cannotContainSpace">
+            Last name can not contain space.
+          </div>
+          <div *ngIf="!lastname.errors.required && lastname.errors.isValid">
+            Lütfen gerçersiz karakterleri kaldırın.
+          </div>
+        </div>
+        <!-- INVALID FEEDBACKS END -->
+  
+        <!-- VALID FEEDBACKS START -->
+        <div *ngIf="lastname.touched && !lastname.invalid" class="valid-feedback">
+          <div>
+            Looks good!.
+          </div>
+        </div>
+        <!-- VALID FEEDBACKS END -->
+      </div>
+    <!-- LASTNAME BITIS -->
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    
+    <!-- PASSWORDS GROUP BASLANGIC -->
+    <div formGroupName="passwords">
+  
+      <!-- PASSWORD BASLANGIC -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          formControlName="password" 
+          type="password" 
+          class="form-control" 
+          name="password" 
+          id="password" 
+          placeholder="Password"
+          [class.is-valid]="!password.invalid && password.touched && !(passwords.hasError('passwordMatch'))" 
+          [class.is-invalid]="(password.invalid || passwords.hasError('passwordMatch')) && password.touched"
+        >
+        <!-- INVALID FEEDBACKS START -->
+        <div *ngIf="password.touched && password.invalid && !passwords.hasError('passwordMatch')" class="invalid-feedback">
+          <div *ngIf="password.errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Password should be minimum {{password.errors.minlength.requiredLength}} characters.
+          </div>
+          <div *ngIf="password.errors.maxlength">
+            Password should be maximum {{password.errors.maxlength.requiredLength}} characters.
+          </div>
+          <div *ngIf="password.errors.cannotContainSpace">
+            Password can not contain space.
+          </div>
+          <div *ngIf="!password.errors.required && password.errors.isValid">
+            Lütfen gerçersiz karakterleri kaldırın.
+          </div>
+        </div>
+        <!-- INVALID FEEDBACKS END -->
+        <div *ngIf="passwords.hasError('passwordMatch')" class="invalid-feedback">
+            Your passwords are not equals.
+        </div>
+        <!-- VALID FEEDBACKS START -->
+        <div *ngIf="password.touched && !password.invalid && !passwords.hasError('passwordMatch')" class="valid-feedback">
+          <div>
+            Looks good!.
+          </div>
+        </div>
+        <!-- VALID FEEDBACKS END -->
+      </div>
+      <!-- PASSWORD BITIS -->
+
+      <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+      <!-- PASSWORD VERIFY BASLANGIC -->
+      <div class="form-group">
+        <label for="confirm_password">Confirm Password</label>
+        <input 
+          formControlName="confirm_password" 
+          type="confirm_password" 
+          class="form-control" 
+          name="confirm_password" 
+          id="confirm_password" 
+          placeholder="Confirm Password"
+          [class.is-valid]="!confirm_password.invalid && confirm_password.touched && !(passwords.hasError('passwordMatch'))" 
+          [class.is-invalid]="(confirm_password.invalid || passwords.hasError('passwordMatch')) && confirm_password.touched"
+        >
+        <!-- INVALID FEEDBACKS START -->
+        <div *ngIf="confirm_password.touched && confirm_password.invalid && !passwords.hasError('passwordMatch')" class="invalid-feedback">
+          <div *ngIf="confirm_password.errors.required">
+            Confirming password is required.
+          </div>
+          <div *ngIf="confirm_password.errors.minlength">
+            Confirming password should be minimum {{confirm_password.errors.minlength.requiredLength}} characters.
+          </div>
+          <div *ngIf="confirm_password.errors.maxlength">
+            Confirming password should be maximum {{confirm_password.errors.maxlength.requiredLength}} characters.
+          </div>
+          <div *ngIf="confirm_password.errors.cannotContainSpace">
+            Confirming password can not contain space.
+          </div>
+          <div *ngIf="!confirm_password.errors.required && confirm_password.errors.isValid">
+            Lütfen gerçersiz karakterleri kaldırın.
+          </div>
+          <div *ngIf="passwords.hasError('passwordMatch')">
+            Your passwords are not equals.
+          </div>
+        </div>
+        <!-- INVALID FEEDBACKS END -->
+        <div *ngIf="passwords.hasError('passwordMatch')" class="invalid-feedback">
+          Your passwords are not equals.
+        </div>
+        <!-- VALID FEEDBACKS START -->
+        <div *ngIf="confirm_password.touched && !confirm_password.invalid && !passwords.hasError('passwordMatch')" class="valid-feedback">
+          <div>
+            Looks good!.
+          </div>
+        </div>
+        <!-- VALID FEEDBACKS END -->
+      </div>
+      <!-- PASSWORD VERIFY BITIS -->
+    </div>
+    <!-- PASSWORDS GROUP BITIS -->
+
+    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
     <button type="submit" class="btn btn-danger">Submit</button>
   </form>
 </div>
-
-<button (click)="tete()"></button>

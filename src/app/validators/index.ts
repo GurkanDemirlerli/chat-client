@@ -1,4 +1,5 @@
+export { LastnameValidators } from './lastname.validators';
+export { FirstnameValidators } from './firstname.validators';
+export { UsernameValidators } from './username.validators';
+export { PasswordValidators } from './password.validators';
 export { EmailValidators } from './email.validators';
-export { EmailValidator } from './email.validator';
-export { SpaceValidators } from './space.validator';
-export { PasswordValidator } from './password.validator';

@@ -1,10 +1,20 @@
 import { AuthService } from './../providers/auth.service';
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import { Injectable } from '@angular/core';
+import { ValidatorsBase } from './validators.base';
 
-@Injectable()
-export class EmailValidators {
+export class EmailValidators extends ValidatorsBase {
 
+    static isValid(control: AbstractControl): ValidationErrors | null {
+        const re = /^\w+@[a-zA-Z]+?\.[a-zA-Z]{2,3}$/.test(control.value);
+
+        if (re) {
+            return null;
+        }
+        return {
+            isValid: true
+        };
+    }
+    
     static shouldBeUnique(authService: AuthService) {
         return (control: AbstractControl): Promise<ValidationErrors | null> => {
             return new Promise((resolve, reject) => {
