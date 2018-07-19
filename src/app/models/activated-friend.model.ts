@@ -4,4 +4,5 @@ export interface ActivatedFriendModel {
     name: String;
     about: String;
     status: String;//String olmasına gerek yok değişecek.
+    friendshipId: String;
 }

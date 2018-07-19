@@ -223,7 +223,7 @@
             Password can not contain space.
           </div>
           <div *ngIf="!password.errors.required && password.errors.isValid">
-            Lütfen gerçersiz karakterleri kaldırın.
+            Password Must have at least one uppercase, lowercase, special character, and number
           </div>
         </div>
         <!-- INVALID FEEDBACKS END -->
@@ -270,7 +270,7 @@
             Confirming password can not contain space.
           </div>
           <div *ngIf="!confirm_password.errors.required && confirm_password.errors.isValid">
-            Lütfen gerçersiz karakterleri kaldırın.
+            Password Must have at least one uppercase, lowercase, special character, and number
           </div>
           <div *ngIf="passwords.hasError('passwordMatch')">
             Your passwords are not equals.

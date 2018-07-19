@@ -4,18 +4,19 @@
       <div class="user-card--picture " [style.background-image]="friend.avatar ? 'url(' + friend.avatar + ')' : inherit">
         <span class="badge badge-success" *ngIf="friend.unReadedMessagesCount > 0">{{friend.unReadedMessagesCount}}</span>
         <div class="letter-avatar" *ngIf="!friend.avatar">
-          {{friend.name | titlecase | slice:0:1}}
+          {{friend.firstname | titlecase | slice:0:1}}
         </div>
       </div>
       <div class="user-card--info ">
         <div class="user-card--info--name ">
-          {{friend.name | titlecase}}
+          {{friend.firstname | titlecase}}
+          {{friend.lastname | titlecase}}
         </div>
         <div class="user-card--info--status" [class.online]="friend.status == 'online'" [class.offline]="friend.status == 'offline'">
-          {{friend.status | titlecase}}
+          {{friend.status | titlecase }}
         </div>
         <div class="user-card--info--about ">
-          {{friend.about}}
+          {{friend.about | slice:0:40}} ...
         </div>
       </div>
     </div>

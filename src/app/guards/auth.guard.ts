@@ -12,13 +12,13 @@ export class AuthRequired implements CanActivate {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-        if (this._authService.loggedIn()) {
-            return true;
-        } else {
-            this.router.navigate(['login']);
-            return false;
-        }
+        return this._authService.isAuthenticated().map((data) => {
+            if (data.data.isAuth) {
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 }
 
@@ -32,11 +32,13 @@ export class AuthNotAllowed implements CanActivate {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        if (!this._authService.loggedIn()) {
-            return true;
-        } else {
-            this.router.navigate(['']);
-            return false;
-        }
+        return this._authService.isAuthenticated().map((data) => {
+            if (!data.data.isAuth) {
+                return true;
+            } else {
+                this.router.navigate(['/login']);
+                return false;
+            }
+        });
     }
 }

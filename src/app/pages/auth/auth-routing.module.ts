@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { AuthNotAllowed, AuthRequired } from '../../guards/auth.guard';
+import { LogoutComponent } from './logout/logout.component';
 // import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [{
@@ -13,14 +15,17 @@ const routes: Routes = [{
         {
             path: 'login',
             component: LoginComponent,
+            canActivate: [AuthNotAllowed]
         }, {
             path: 'signup',
             component: SignupComponent,
+            canActivate: [AuthNotAllowed]
         },
-        //  {
-        //   path: 'logout',
-        //   component: LogoutComponent,
-        // },
+        {
+            path: 'logout',
+            component: LogoutComponent,
+            canActivate: [AuthRequired]
+        },
     ],
 }];
 
@@ -34,5 +39,6 @@ export const routedComponents = [
     AuthComponent,
     LoginComponent,
     SignupComponent,
+    LogoutComponent
     // LogoutComponent,
 ];

@@ -3,13 +3,13 @@
   <div class="friend-details ">
     <div class="friend-details--picture" [style.background-image]="_activatedFriend.avatar ? 'url(' + _activatedFriend.avatar + ')' : inherit">
       <div class="letter-avatar" *ngIf="!_activatedFriend.avatar">
-        {{_activatedFriend.name | titlecase | slice:0:1}}
+        {{_activatedFriend.firstname | titlecase | slice:0:1}}
       </div>
     </div>
     <div class="friend-details--info ">
 
       <div class="friend-details--info--username ">
-        {{_activatedFriend.name | titlecase}}
+        {{_activatedFriend.firstname | titlecase}} {{_activatedFriend.lastname | titlecase}}
       </div>
       <div class="friend-details--info--status" [class.online]="_activatedFriend.status == 'online'" [class.offline]="_activatedFriend.status == 'offline'">
         {{_activatedFriend.status | titlecase}}
@@ -22,13 +22,20 @@
   <div #scrollMe [scrollTop]="scrollMe.scrollHeight" class="messages ">
 
     <div class="div" *ngFor="let message of messages">
-      <div class="message" [class.message-sent]="_activatedFriend?._id != message.from._id" [class.message-received]="_activatedFriend?._id == message.from._id">
+      <div class="message" [class.message-sent]="_activatedFriend?._id != message.from" [class.message-received]="_activatedFriend?._id == message.from">
 
         <div class="username ">
-          <div class="name ">{{message.from.name}}</div>
+          <div class="name">
+            <div *ngIf="_activatedFriend?._id != message.from">
+              {{me.firstname}}
+            </div>
+            <div *ngIf="_activatedFriend?._id === message.from">
+              {{_activatedFriend.firstname}}
+            </div>
+          </div>
 
           <div class="date-and-status">
-            <div class="status" *ngIf="_activatedFriend?._id != message.from._id">
+            <div class="status" *ngIf="_activatedFriend?._id != message.from">
               <i class="fas readed" [class.fa-check]="!message.isRead" [class.fa-check-double]="message.isRead" [class.readed]="message.isRead"></i>
             </div>
             <div class="date"> {{message.createdAt | date:'HH:mm'}}</div>

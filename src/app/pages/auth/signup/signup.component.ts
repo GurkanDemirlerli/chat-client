@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../providers';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   EmailValidators,
   UsernameValidators,
@@ -102,8 +102,8 @@ export class SignupComponent implements OnInit {
         [
           //#region Sync Validators
           Validators.required,
-          Validators.maxLength(20),
-          Validators.minLength(6),
+          Validators.maxLength(35),
+          Validators.minLength(8),
           PasswordValidators.isValid,
           LastnameValidators.cannotContainSpace
           //#endregion
@@ -120,8 +120,8 @@ export class SignupComponent implements OnInit {
         [
           //#region Sync Validators
           Validators.required,
-          Validators.maxLength(20),
-          Validators.minLength(6),
+          Validators.maxLength(35),
+          Validators.minLength(8),
           PasswordValidators.isValid,
           LastnameValidators.cannotContainSpace
           //#endregion
@@ -171,8 +171,13 @@ export class SignupComponent implements OnInit {
   //#endregion
 
   register() {
-    console.log(this.registerForm.value);
-    this.authService.registerUser(this.registerForm.value).subscribe((resp) => {
+    this.authService.signup({
+      email: this.email.value,
+      username: this.username.value,
+      firstname: this.firstname.value,
+      lastname: this.lastname.value,
+      password: this.password.value,
+    }).subscribe((resp) => {
       if (resp.success) {
         this.router.navigate(['/login']);
         console.log('KAYIT BAŞARILI');

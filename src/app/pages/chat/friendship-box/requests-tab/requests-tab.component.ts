@@ -9,15 +9,20 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['./requests-tab.component.css']
 })
 export class RequestsTabComponent implements OnInit {
-    requests;
+    sentRequests;
+    receivedRequests;
 
     constructor(
         private socket: Socket,
         private friendshipService: FriendShipService
     ) {
-        this.friendshipService.getMyAllFriendShipRequests().subscribe((requests) => {
+        this.friendshipService.getSendedRequests().subscribe((requests) => {
             console.log(requests);
-            this.requests = requests.data;
+            this.sentRequests = requests.data;
+        });
+        this.friendshipService.getReceivedRequests().subscribe((requests) => {
+            console.log(requests);
+            this.receivedRequests = requests.data;
         });
     }
 
@@ -25,9 +30,9 @@ export class RequestsTabComponent implements OnInit {
     acceptFriendShipRequest(friendShipRequestId, userId) {
         this.friendshipService.acceptFriendShipRequest(friendShipRequestId).subscribe((result) => {
             if (result.success) {
-                for (var i = 0; i < this.requests.length; i++)
-                    if (this.requests[i].sender._id == userId) {
-                        this.requests.splice(i, 1);
+                for (var i = 0; i < this.receivedRequests.length; i++)
+                    if (this.receivedRequests[i].sender._id == userId) {
+                        this.receivedRequests.splice(i, 1);
                         break;
                     }
                 this.friendshipService.emitReceivedFriendRequestsCount(this.friendshipService.receivedFriendRequestsCount.value - 1);
@@ -40,9 +45,9 @@ export class RequestsTabComponent implements OnInit {
     rejectFriendShipRequest(friendShipRequestId, userId) {
         this.friendshipService.rejectFriendShipRequest(friendShipRequestId).subscribe((result) => {
             if (result.success) {
-                for (var i = 0; i < this.requests.length; i++)
-                    if (this.requests[i].sender._id == userId) {
-                        this.requests.splice(i, 1);
+                for (var i = 0; i < this.receivedRequests.length; i++)
+                    if (this.receivedRequests[i].sender._id == userId) {
+                        this.receivedRequests.splice(i, 1);
                         break;
                     }
                 this.friendshipService.emitReceivedFriendRequestsCount(this.friendshipService.receivedFriendRequestsCount.value - 1);
@@ -55,9 +60,9 @@ export class RequestsTabComponent implements OnInit {
     cancelSendedFriendShipRequest(friendShipRequestId, userId) {
         this.friendshipService.cancelSendedFriendShipRequest(friendShipRequestId).subscribe((result) => {
             if (result.success) {
-                for (var i = 0; i < this.requests.length; i++)
-                    if (this.requests[i].receiver._id == userId) {
-                        this.requests.splice(i, 1);
+                for (var i = 0; i < this.sentRequests.length; i++)
+                    if (this.sentRequests[i].receiver._id == userId) {
+                        this.sentRequests.splice(i, 1);
                         break;
                     }
             } else {

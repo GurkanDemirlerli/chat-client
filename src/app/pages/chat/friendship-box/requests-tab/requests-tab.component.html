@@ -1,20 +1,20 @@
 <div class="requests-tab">
 
   <div class="received-requests">
-    <div *ngFor="let request of requests">
+    <div *ngFor="let request of receivedRequests">
 
-      <div class="user-card" *ngIf="!request.isSelfRequest">
+      <div class="user-card">
         <div class="user-card--picture " [style.background-image]="request.sender.avatar ? 'url(' + request.sender.avatar + ')' : inherit">
           <div class="letter-avatar" *ngIf="!request.sender.avatar">
-            {{request.sender.name | titlecase | slice:0:1}}
+            {{request.sender.firstname | titlecase | slice:0:1}}
           </div>
         </div>
         <div class="user-card--info ">
           <div class="user-card--info--name ">
-            {{request.sender.name | titlecase}}
+            {{request.sender.firstname | titlecase}} {{request.sender.lastname | titlecase}}
           </div>
-          <div class="user-card--info--about ">
-            {{request.sender.email}}
+          <div class="user-card--info--about " style="font-style:italic">
+            @{{request.sender.username}}
           </div>
         </div>
 
@@ -38,20 +38,20 @@
   </div>
 
   <div class="sended-requests">
-    <div *ngFor="let request of requests">
+    <div *ngFor="let request of sentRequests">
 
-      <div class="user-card" *ngIf="request.isSelfRequest">
+      <div class="user-card">
         <div class="user-card--picture " [style.background-image]="request.receiver.avatar ? 'url(' + request.receiver.avatar + ')' : inherit">
           <div class="letter-avatar" *ngIf="!request.receiver.avatar">
-            {{request.receiver.name | titlecase | slice:0:1}}
+            {{request.receiver.firstname | titlecase | slice:0:1}}
           </div>
         </div>
         <div class="user-card--info ">
           <div class="user-card--info--name ">
-            {{request.receiver.name | titlecase}}
+            {{request.receiver.firstname | titlecase}} {{request.receiver.lastname | titlecase}}
           </div>
-          <div class="user-card--info--about ">
-            {{request.receiver.email}}
+          <div class="user-card--info--about" style="font-style:italic">
+            @{{request.receiver.username}}
           </div>
         </div>
 

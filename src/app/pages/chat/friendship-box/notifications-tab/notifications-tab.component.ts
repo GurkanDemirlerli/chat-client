@@ -23,10 +23,10 @@ export class NotificationsTabComponent implements OnInit {
                 let content: String;
                 switch (item.contentType) {
                     case LocalNotificationTypes.FRIEND_REQUEST_ACCEPTED:
-                        content = item.from.name + " arkadaşlık isteğini kabul etti.";
+                        content = item.from.firstname + " " + item.from.lastname + " arkadaşlık isteğini kabul etti.";
                         break;
                     case LocalNotificationTypes.FRIEND_REQUEST_REJECTED:
-                        content = item.from.name + " arkadaşlık isteğini reddetti.";
+                        content = item.from.firstname + " " + item.from.lastname + " arkadaşlık isteğini reddetti.";
                         break;
                     default:
                         break;

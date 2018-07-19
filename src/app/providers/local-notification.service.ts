@@ -41,12 +41,12 @@ export class LocalNotificationService {
 
     getMylocalNotifications() {
         this.createAuthenticationHeaders();
-        return this.http.get(this.domain + '/api/users/getMyNotifications', this.options).map(res => res.json());
+        return this.http.get(this.domain + '/api/local-notifications/list', this.options).map(res => res.json());
     }
 
     private getUnReadedNotificationsCount() {
         this.createAuthenticationHeaders();
-        return this.http.get(this.domain + '/api/users/getUnReadedNotificationsCount', this.options).map(res => res.json());
+        return this.http.get(this.domain + '/api/local-notifications/unreadedCount', this.options).map(res => res.json());
     }
 
     private loadToken() {
@@ -55,7 +55,7 @@ export class LocalNotificationService {
 
     makeAllNotificationsReaded() {
         this.createAuthenticationHeaders();
-        return this.http.get(this.domain + '/api/users/makeAllNotificationsReaded', this.options).map(res => res.json());
+        return this.http.get(this.domain + '/api/local-notifications/makeAllReaded', this.options).map(res => res.json());
     }
 
     observeLocalNotifications() {

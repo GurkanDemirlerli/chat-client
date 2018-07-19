@@ -1,3 +1,4 @@
+import { ServicesHelpers } from './helpers';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -9,8 +10,6 @@ import { Socket } from 'ng-socket-io';
 export class FriendShipService {
 
     private domain = server.url + "/";
-    private authToken;
-    private options;
 
     receivedFriendRequestsCount: BehaviorSubject<number> = new BehaviorSubject(0);
     emitReceivedFriendRequestsCount(newValue) {
@@ -27,67 +26,61 @@ export class FriendShipService {
         this.observeReceivedFriendRequestsCount();
     }
 
-    // Function to create headers, add token, to be used in HTTP requests
-    createAuthenticationHeaders() {
-        this.loadToken(); // Get token so it can be attached to headers
-        // Headers configuration options
-        this.options = new RequestOptions({
-            headers: new Headers({
-                'Content-Type': 'application/json', // Format set to JSON
-                'authorization': this.authToken // Attach token
-            })
-        });
-    }
-
-    loadToken() {
-        this.authToken = localStorage.getItem('token');; // Get token and asssign to variable to be used elsewhere
-    }
-    sendFriendShipRequest(userId) {
-        const body = {
-            receiver: userId
-        }
-        this.createAuthenticationHeaders();
-        return this.http.post(this.domain + 'api/friendship/sendFriendShipRequest', body, this.options).map(res => res.json());
-    }
-
-    acceptFriendShipRequest(friendShipRequestId) {
-        const body = {
-            friendShipRequestId: friendShipRequestId
-        }
-        this.createAuthenticationHeaders();
-        return this.http.post(this.domain + 'api/friendship/acceptFriendShipRequest', body, this.options).map(res => res.json());
-    }
-    rejectFriendShipRequest(friendShipRequestId) {
-        const body = {
-            friendShipRequestId: friendShipRequestId
-        }
-        this.createAuthenticationHeaders();
-        return this.http.post(this.domain + 'api/friendship/rejectFriendShipRequest', body, this.options).map(res => res.json());
-    }
-
-    cancelSendedFriendShipRequest(friendShipRequestId) {
-        const body = {
-            friendShipRequestId: friendShipRequestId
-        }
-        this.createAuthenticationHeaders();
-        return this.http.post(this.domain + 'api/friendship/cancelSendedFriendShipRequest', body, this.options).map(res => res.json());
-    }
-
-    getReceivedFriendRequestsCount() {
-        this.createAuthenticationHeaders();
-        return this.http.get(this.domain + 'api/friendship/getReceivedFriendRequestsCount', this.options).map(res => res.json());
-    }
-
     observeReceivedFriendRequestsCount() {
         this.socket.on('receiveFriendShipRequest', data => {
-            // observer.next(data);
             this.emitReceivedFriendRequestsCount(this.receivedFriendRequestsCount.value + data);
         });
     }
 
-    getMyAllFriendShipRequests() {
-        this.createAuthenticationHeaders();
-        return this.http.get(this.domain + 'api/friendship/getMyAllFriendShipRequests', this.options).map(res => res.json());
+    sendFriendShipRequest(userId) {
+        const body = {
+            receiver: userId
+        }
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.post(this.domain + 'api/friendship/sendFriendShipRequest', body, options).map(res => res.json());
     }
 
+    acceptFriendShipRequest(friendShipRequestId) {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/friendship/accept' + "/" + friendShipRequestId, options).map(res => res.json());
+    }
+
+    rejectFriendShipRequest(friendShipRequestId) {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/friendship/reject' + "/" + + friendShipRequestId, options).map(res => res.json());
+    }
+
+    cancelSendedFriendShipRequest(friendShipRequestId) {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/friendship/cancel' + "/" + + friendShipRequestId, options).map(res => res.json());
+    }
+
+    getReceivedFriendRequestsCount() {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/friendship/getReceivedRequestCount', options).map(res => res.json());
+    }
+
+    getSendedRequests() {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/friendship/listSendedRequests', options).map(res => res.json());
+    }
+
+    getReceivedRequests() {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/friendship/listReceivedRequests', options).map(res => res.json());
+    }
+
+    listFriends() {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/friendship/listFriends', options).map(res => res.json());
+    }
+    
+    // remove() {
+
+    // }
+
+    findMyFriend(friendId) {
+        let options = ServicesHelpers.createAuthenticationHeader();
+        return this.http.get(this.domain + 'api/users/findFriend/' + friendId, options).map(res => res.json());
+    }
 }

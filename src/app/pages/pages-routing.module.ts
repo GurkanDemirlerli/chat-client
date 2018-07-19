@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ChatComponent } from './chat/chat.component';
 import { HomeComponent } from './home/home.component';
 import { PagesComponent } from './pages.component';
+import { AuthRequired } from '../guards/auth.guard';
 
 const routes: Routes = [{
     path: '',
@@ -11,9 +12,11 @@ const routes: Routes = [{
     children: [{
         path: 'home',
         component: HomeComponent,
+        canActivate: [AuthRequired]
     }, {
         path: 'chat',
         component: ChatComponent,
+        canActivate: [AuthRequired]
     }, {
         path: 'auth',
         loadChildren: './auth/auth.module#AuthModule',

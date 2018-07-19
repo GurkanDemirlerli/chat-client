@@ -1,7 +1,7 @@
 import { Socket } from 'ng-socket-io';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { UserService } from '../../../../providers';
+import { UserService, FriendShipService } from '../../../../providers';
 
 @Component({
     selector: 'app-friends-tab',
@@ -13,14 +13,12 @@ export class FriendsTabComponent implements OnInit {
     friends = [];
     activatedFriend = "";
 
-    drogbaPicture = "http://img2.cdn.turkiyegazetesi.com.tr/images/Resources/2014/5/10/700x155282_drogba_1.jpg";
-    messiPicture = "http://www.kimnereli.net/wp-content/uploads/Messi-310x250.jpg";
-
     constructor(
         private socket: Socket,
-        private userService: UserService
+        private userService: UserService,
+        private friendshipService: FriendShipService
     ) {
-        this.userService.getMyFriends().subscribe((friends) => {
+        this.friendshipService.listFriends().subscribe((friends) => {
             this.friends = friends.data;
             console.log(this.friends);
         });

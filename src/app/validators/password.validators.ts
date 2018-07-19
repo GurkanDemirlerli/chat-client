@@ -4,7 +4,7 @@ import { ValidatorsBase } from './validators.base';
 export class PasswordValidators extends ValidatorsBase {
 
     static isValid(control: AbstractControl): ValidationErrors | null {
-        const re = /^[a-zA-Z0-9]+$/.test(control.value);//degistir
+        const re = /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/.test(control.value);//degistir
 
         if (re) {
             return null;

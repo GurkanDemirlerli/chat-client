@@ -41,8 +41,6 @@ body {
 
 /* Track */
 
-
-
 .chat-box {
   background-color: white;
   border-radius: 25px 25px 10px 10px;
@@ -111,7 +109,7 @@ clearfix::after {
 }
 
 .message-sent .username {
-  color: white;
+  color: black;
 }
 
 .message-sent .username .name {
@@ -145,8 +143,8 @@ clearfix::after {
 }
 
 .message-sent {
-  color: white;
-  background-color: #5bc0de;
+  color: black;
+  background-color: #dffdf6;
   border: 1px solid rgb(238, 238, 238);
   float: right;
 }
@@ -345,6 +343,7 @@ clearfix::after {
   color: gray;
   font-size: 14px;
   font-weight: lighter;
+  text-align: justify;
 }
 
 .user-card.activated .user-card--info--name {

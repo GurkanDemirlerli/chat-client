@@ -1,7 +1,7 @@
 import { Socket } from 'ng-socket-io';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { MessageService, UserService } from '../../../providers';
+import { MessageService, UserService, AuthService } from '../../../providers';
 import { ActivatedFriendModel } from '../../../models';
 
 @Component({
@@ -11,20 +11,26 @@ import { ActivatedFriendModel } from '../../../models';
 })
 export class MessageBoxComponent implements OnInit {
     private _activatedFriend: ActivatedFriendModel;
-    drogbaPicture = "http://img2.cdn.turkiyegazetesi.com.tr/images/Resources/2014/5/10/700x155282_drogba_1.jpg";
     friend;
+    me;
     messages = [];
     input = "";
     @Input()
     set activatedFriend(activatedFriend) {
         if (activatedFriend) {
+            console.log(activatedFriend);
             this._activatedFriend = activatedFriend;
-            this.messageService.getMessagesBetweenMyFriend(this._activatedFriend._id).subscribe((messages) => {
+            this.messageService.listChat(this._activatedFriend._id).subscribe((messages) => {
                 this.messages = messages.data;
             });
-            this.messageService.makeAllReceivedMessagesReadedFromMyFriend(activatedFriend._id).subscribe((res) => {
+            this.messageService.makeChatMessagesReaded(activatedFriend._id).subscribe((res) => {
 
             });
+
+            this.authService.getMyProfileCard().subscribe((me) => {
+                this.me = me.data;
+            });
+
         }
     }
 
@@ -33,7 +39,8 @@ export class MessageBoxComponent implements OnInit {
     constructor(
         private socket: Socket,
         private userService: UserService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private authService: AuthService
     ) {
         this.getMessages().subscribe(message => {
             console.log(message);
@@ -70,7 +77,7 @@ export class MessageBoxComponent implements OnInit {
                 if (this._activatedFriend) {
                     if (data.from._id == this._activatedFriend._id) {
                         observer.next(data);
-                        this.messageService.makeAllReceivedMessagesReadedFromMyFriend(this._activatedFriend._id).subscribe((res) => {
+                        this.messageService.makeChatMessagesReaded(this._activatedFriend._id).subscribe((res) => {
                         });
                     }
                 }
@@ -82,16 +89,15 @@ export class MessageBoxComponent implements OnInit {
     sendMessage() {
         const message = {
             to: this._activatedFriend._id,
-            content: this.input
+            content: this.input,
+            ownerFriendship: this._activatedFriend.friendshipId,
         }
-        this.messageService.createMessage(message).subscribe((res) => {
+        this.messageService.add(message).subscribe((res) => {
             // console.log(res.data);
             this.messages.push(res.data);
         });
         this.input = "";
     }
-
-
 
     ngOnInit() {
 

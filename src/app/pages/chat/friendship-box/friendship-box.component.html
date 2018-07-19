@@ -2,15 +2,16 @@
   <div class="friends-box--header ">
     <div class="my-picture" [style.background-image]="myProfileCard?.avatar ? 'url(' + myProfileCard?.avatar + ')' : inherit">
       <div class="letter-avatar" *ngIf="!myProfileCard?.avatar">
-        {{myProfileCard?.name | titlecase | slice:0:1}}
+        {{myProfileCard?.firstname | titlecase | slice:0:1}}
       </div>
     </div>
     <div class="my-info">
       <div class="my-username ">
-        {{myProfileCard?.name | titlecase}}
+        {{myProfileCard?.firstname | titlecase}}
+        {{myProfileCard?.lastname | titlecase}}
       </div>
       <div class="my-about">
-        {{myProfileCard?.about |titlecase}}
+        {{myProfileCard?.about |titlecase | slice:0:35}} ...
       </div>
     </div>
     <div class="notifications" *ngIf="notificationCount == 0">
