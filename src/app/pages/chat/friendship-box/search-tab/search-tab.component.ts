@@ -17,11 +17,18 @@ export class SearchTabComponent {
 
     }
 
-    searchUsers(input) {
-        if (input.length > 2) {
-            this.userService.searchUsersByName(input).subscribe((users) => {
-                this.users = users.data;
-            });
+    searchUsers() {
+        let input = this.searchInput;
+        if (this.searchInput.length > 0) {
+            setTimeout(() => {
+                if (input === this.searchInput) {
+                    this.userService.searchUsersByName(this.searchInput).subscribe((users) => {
+                        this.users = users.data;
+                    });
+                }
+            }, 300);
+        } else {
+            this.users = [];
         }
     }
 

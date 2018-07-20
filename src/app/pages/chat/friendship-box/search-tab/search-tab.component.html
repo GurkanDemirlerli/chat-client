@@ -2,22 +2,23 @@
   <div class="icon">
     <i class="fa fa-search"></i>
   </div>
-  <input class="form-control mr-sm-2 search-users" [ngModel]="searchInput" (ngModelChange)="searchUsers($event)" type="search"
+  <input class="form-control mr-sm-2 search-users" [(ngModel)]="searchInput" (ngModelChange)="searchUsers()" type="search"
     placeholder="Arkadaşlarını Bul" aria-label="Search">
   <div class="clearfix"></div>
 
   <div class="user-card " *ngFor="let user of users">
     <div class="user-card--picture " [style.background-image]="user.avatar ? 'url(' + user.avatar + ')' : inherit">
       <div class="letter-avatar" *ngIf="!user.avatar">
-        {{user.name | titlecase | slice:0:1}}
+        {{user.firstname | titlecase | slice:0:1}}
       </div>
     </div>
     <div class="user-card--info ">
       <div class="user-card--info--name ">
-        {{user.name | titlecase}}
+        {{user.firstname | titlecase}}
+        {{user.lastname | titlecase}}
       </div>
       <div class="user-card--info--about ">
-        {{user.email}}
+        @{{user.username}}
       </div>
     </div>
 

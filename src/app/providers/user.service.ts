@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Socket } from 'ng-socket-io';
 import { server } from '../../environments/environment';
 import { ServicesHelpers } from './helpers';
 
@@ -13,10 +12,10 @@ export class UserService {
     constructor(
         private http: Http,
     ) { }
- 
-    public searchUsersByName(name) {
+
+    public searchUsersByName(username) {
         let options = ServicesHelpers.createAuthenticationHeader();
-        return this.http.get(this.domain + 'api/users/searchUsersByUsername?name=' + name, options).map(res => res.json());
+        return this.http.get(this.domain + 'api/users/searchUsersByUsername?username=' + username + '&limit=20&skip=0', options).map(res => res.json());
     }
 
     public changeNotificationId(userId, notificationId) {
