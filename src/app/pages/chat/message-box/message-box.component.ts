@@ -75,7 +75,7 @@ export class MessageBoxComponent implements OnInit {
             this.socket.on('receiveMessage', data => {
                 console.log(data);
                 if (this._activatedFriend) {
-                    if (data.from._id == this._activatedFriend._id) {
+                    if (data.from == this._activatedFriend._id) {
                         observer.next(data);
                         this.messageService.makeChatMessagesReaded(this._activatedFriend._id).subscribe((res) => {
                         });

@@ -36,7 +36,7 @@ export class AuthService {
 
   getMyProfileCard() {
     let options = ServicesHelpers.createAuthenticationHeader();
-    return this.http.get(this.domain + 'api/users/getMyProfileCard', options).map(res => res.json());
+    return this.http.get(this.domain + 'api/auth/getMyProfileCard', options).map(res => res.json());
   }
 
   logout() {

@@ -47,12 +47,12 @@ export class FriendShipService {
 
     rejectFriendShipRequest(friendShipRequestId) {
         let options = ServicesHelpers.createAuthenticationHeader();
-        return this.http.get(this.domain + 'api/friendship/reject' + "/" + + friendShipRequestId, options).map(res => res.json());
+        return this.http.get(this.domain + 'api/friendship/reject' + "/" + friendShipRequestId, options).map(res => res.json());
     }
 
     cancelSendedFriendShipRequest(friendShipRequestId) {
         let options = ServicesHelpers.createAuthenticationHeader();
-        return this.http.get(this.domain + 'api/friendship/cancel' + "/" + + friendShipRequestId, options).map(res => res.json());
+        return this.http.get(this.domain + 'api/friendship/cancel' + "/" + friendShipRequestId, options).map(res => res.json());
     }
 
     getReceivedFriendRequestsCount() {
@@ -74,7 +74,7 @@ export class FriendShipService {
         let options = ServicesHelpers.createAuthenticationHeader();
         return this.http.get(this.domain + 'api/friendship/listFriends', options).map(res => res.json());
     }
-    
+
     // remove() {
 
     // }

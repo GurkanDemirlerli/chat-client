@@ -24,6 +24,7 @@ export class FriendsTabComponent implements OnInit {
         });
 
         this.observeBeingOnline().subscribe(friendId => {
+            console.log('giris yapti :', friendId);
             this.friends.forEach(friend => {
                 if (friend._id == friendId) {
                     friend.status = 'online';
@@ -33,6 +34,7 @@ export class FriendsTabComponent implements OnInit {
         });
 
         this.observeBeingOffline().subscribe(friendId => {
+            console.log('cikis yapti:', friendId);
             this.friends.forEach(friend => {
                 if (friend._id == friendId) {
                     friend.status = 'offline';
@@ -44,12 +46,11 @@ export class FriendsTabComponent implements OnInit {
 
         this.observeUnreadedMessages().subscribe((data: any) => {
             this.friends.forEach(friend => {
-                if (friend._id == data.from._id && this.activatedFriend != data.from._id) {
+                if (friend._id == data.from && this.activatedFriend != data.from) {
                     friend.unReadedMessagesCount++;
                 }
             });
         });
-
     }
 
     observeBeingOnline() {
