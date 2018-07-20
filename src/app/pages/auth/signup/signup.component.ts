@@ -180,12 +180,10 @@ export class SignupComponent implements OnInit {
     }).subscribe((resp) => {
       if (resp.success) {
         this.router.navigate(['/login']);
-        console.log('KAYIT BAŞARILI');
       } else {
         this.registerForm.setErrors({
           invalidRegister: true
         });
-        console.log('KAYIT OLUNAMADI');
       }
     });
   }

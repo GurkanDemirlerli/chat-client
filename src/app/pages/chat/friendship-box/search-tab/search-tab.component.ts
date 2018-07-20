@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './search-tab.component.html',
     styleUrls: ['./search-tab.component.css']
 })
-export class SearchTabComponent implements OnInit {
-    searchInput = "ma";
+export class SearchTabComponent {
+    searchInput = "";
     users;
 
     constructor(
@@ -21,15 +21,12 @@ export class SearchTabComponent implements OnInit {
         if (input.length > 2) {
             this.userService.searchUsersByName(input).subscribe((users) => {
                 this.users = users.data;
-                console.log(this.users);
             });
-            console.log(input);
         }
     }
 
     sendFriendShipRequest(userId) {
         this.friendshipService.sendFriendShipRequest(userId).subscribe((result) => {
-            console.log(result);
             if (result.success) {
                 this.users.forEach(user => {
                     if (user._id == userId) {
@@ -78,9 +75,6 @@ export class SearchTabComponent implements OnInit {
                 });
             }
         });
-    }
-
-    ngOnInit() {
     }
 
 }

@@ -1,7 +1,5 @@
-import { Socket } from 'ng-socket-io';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { UserService, LocalNotificationService } from '../../../../providers';
+import { Component, OnInit } from '@angular/core';
+import { LocalNotificationService } from '../../../../providers';
 import { LocalNotificationTypes } from '../../../../enums';
 import { LocalNotificationModel } from '../../../../models';
 
@@ -10,12 +8,9 @@ import { LocalNotificationModel } from '../../../../models';
     templateUrl: './notifications-tab.component.html',
     styleUrls: ['./notifications-tab.component.css']
 })
-export class NotificationsTabComponent implements OnInit {
+export class NotificationsTabComponent {
     notifications: LocalNotificationModel[] = [];
-    art = 1;
     constructor(
-        private socket: Socket,
-        private userService: UserService,
         private localNotificationService: LocalNotificationService
     ) {
         this.localNotificationService.getMylocalNotifications().subscribe((notifications) => {
@@ -39,23 +34,12 @@ export class NotificationsTabComponent implements OnInit {
                     createdAt: item.createdAt
                 }
                 this.notifications.push(notification);
-                console.log(this.notifications);
             });
             this.localNotificationService.makeAllNotificationsReaded().subscribe((res) => {
                 if (res.success) {
                     this.localNotificationService.emitUnReadedNotificationsCount(0);
-                    console.log('Notificationlar okundu olarak isaretlendi.');
                 }
             });
         });
     }
-
-    arttir() {
-        this.localNotificationService.emitUnReadedNotificationsCount(this.art);
-        this.art++;
-    }
-
-    ngOnInit() {
-    }
-
 }

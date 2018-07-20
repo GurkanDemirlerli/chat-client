@@ -17,11 +17,9 @@ export class RequestsTabComponent implements OnInit {
         private friendshipService: FriendShipService
     ) {
         this.friendshipService.getSendedRequests().subscribe((requests) => {
-            console.log(requests);
             this.sentRequests = requests.data;
         });
         this.friendshipService.getReceivedRequests().subscribe((requests) => {
-            console.log(requests);
             this.receivedRequests = requests.data;
         });
     }
@@ -58,7 +56,6 @@ export class RequestsTabComponent implements OnInit {
     }
 
     cancelSendedFriendShipRequest(friendShipRequestId, userId) {
-        console.log(friendShipRequestId);
         this.friendshipService.cancelSendedFriendShipRequest(friendShipRequestId).subscribe((result) => {
             if (result.success) {
                 for (var i = 0; i < this.sentRequests.length; i++)
